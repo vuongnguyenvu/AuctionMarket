@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+          http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+">
+<context:component-scan base-package="com.mycompany.auctionmarket"/>
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jsp/"/>
+    <property name="suffix" value=".jsp"/>
+</bean>
+<mvc:default-servlet-handler/>
+<mvc:annotation-driven/>
+<mvc:resources mapping="/webjars/**" location="/webjars/" />
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select username,password,1 as enabled from user where username=?"
+            authorities-by-username-query="select user.username as username, concat('ROLE_',role_name) from role join user on role.role_id = user.role_id where user.username=?"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+    <!--<security:http pattern="/favicon.ico" security="none"/>-->
+    <!--<security:http pattern="/*" security="none"/>-->
+    <security:http auto-config="true">
+        <security:form-login login-page="/login.jsp" login-processing-url="/j_spring_security_check" 
+                             username-parameter="username" password-parameter="password" />
+        <!--<security:logout logout-url="logout" logout-success-url="/index.jsp" />-->
+        <security:intercept-url pattern="/user/*" access="hasAnyRole('ROLE_admin,ROLE_customer')"/>
+        <security:intercept-url pattern="/admin/*" access="hasRole('ROLE_admin')"/>
+    </security:http>
+</beans>
