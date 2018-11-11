@@ -7,6 +7,7 @@ import java.util.Base64;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordUtil {
     public static String hashPassword(String password){
@@ -27,6 +28,11 @@ public class PasswordUtil {
             Logger.getLogger(PasswordUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return sb.toString();
+    }
+    public String encode(String password) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(password);
+            return encodedPassword;
     }
     
 }

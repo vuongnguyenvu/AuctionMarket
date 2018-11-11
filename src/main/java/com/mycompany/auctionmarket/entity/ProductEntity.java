@@ -41,19 +41,19 @@ private CategoryEntity category;
 @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
 private List<ImageEntity> listImage;
 
-@OneToOne(mappedBy = "product")
-private AuctionEntity auction;
+@OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+private List<AuctionEntity> auctions;
 
 
     public ProductEntity() {
     }
 
-    public AuctionEntity getAuction() {
-        return auction;
+    public List<AuctionEntity> getAuctions() {
+        return auctions;
     }
 
-    public void setAuction(AuctionEntity auction) {
-        this.auction = auction;
+    public void setAuctions(List<AuctionEntity> auctions) {
+        this.auctions = auctions;
     }
 
     public int getProduct_id() {

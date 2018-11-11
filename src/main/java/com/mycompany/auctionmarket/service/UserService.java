@@ -26,9 +26,9 @@ public class UserService implements Serializable{
     public RoleEntity getRoleById(int id){
         return roleRepo.findOne(id);
     }
-    public UserEntity findUserByUsername(String username){
-        return userRepo.findByUsername(username);
-    }
+//    public UserEntity findUserByUsername(String username){
+//        return userRepo.findByUsername(username);
+//    }
     public List<UserEntity> getListUser(){
         return (List<UserEntity>) userRepo.findAll();
     }
@@ -40,5 +40,12 @@ public class UserService implements Serializable{
         amount=amount+user.getAmount();
         user.setAmount(amount);
         return userRepo.save(user);
+    }
+    public UserEntity getUserByUsername(String username){
+        List<UserEntity> users = userRepo.findByUsername(username);
+        if(users != null) {
+            return users.get(0);
+        }
+        return null;
     }
 }

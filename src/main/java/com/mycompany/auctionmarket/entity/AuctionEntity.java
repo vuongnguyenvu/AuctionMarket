@@ -5,6 +5,7 @@
  */
 package com.mycompany.auctionmarket.entity;
 
+import java.io.File;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Entity
@@ -49,8 +52,8 @@ private boolean status;
 @JoinColumn(name = "user_id")
 private UserEntity user;
 
-@OneToOne(cascade = CascadeType.ALL)
-@PrimaryKeyJoinColumn
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "product_id")
 private ProductEntity product;
 
 @OneToMany(mappedBy = "auction")    
@@ -58,6 +61,7 @@ private List<BidEntity> listBid;
 
     public AuctionEntity() {
     }
+
 
     public int getAuction_id() {
         return auction_id;

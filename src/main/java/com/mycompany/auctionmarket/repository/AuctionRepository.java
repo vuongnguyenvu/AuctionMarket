@@ -5,12 +5,16 @@
  */
 package com.mycompany.auctionmarket.repository;
 
-import com.mycompany.auctionmarket.entity.UserEntity;
+import com.mycompany.auctionmarket.entity.AuctionEntity;
 import java.io.Serializable;
-import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+/**
+ *
+ * @author VUKE
+ */
 @Repository
-public interface UserRepository extends CrudRepository<UserEntity, Integer>{
-    List<UserEntity> findByUsername(String username);
+public interface AuctionRepository extends CrudRepository<AuctionEntity, Integer>{
+    
 }
