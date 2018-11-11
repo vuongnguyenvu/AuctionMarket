@@ -25,4 +25,7 @@ public class UserService implements Serializable{
     public RoleEntity getRoleById(int id){
         return roleRepo.findOne(id);
     }
+    public UserEntity findUserByUsername(String username){
+        return userRepo.findByUsername(username);
+    }
 }

@@ -1,6 +1,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="mvc"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,12 +178,20 @@
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>New User Signup!</h2>
-						<form action="#">
+                                                <mvc:form action="register" method="post"  modelAttribute="user" class="form-horizontal">
+                                                    <mvc:input  path="username" type="text" placeholder="Username"/>
+                                                    <mvc:input  path="password" type="password" placeholder="Password"/>
+                                                    <mvc:input  path="email" type="text" placeholder="Email"/>
+                                                    <mvc:input  path="address" type="text" placeholder="Address"/>
+                                                    <mvc:input  path="phone" type="text" placeholder="Phone number"/>
+                                                    <button type="submit" class="btn btn-default">Signup</button>
+                                                </mvc:form>
+<!--						<form action="#">
 							<input type="text" placeholder="Name"/>
 							<input type="email" placeholder="Email Address"/>
 							<input type="password" placeholder="Password"/>
 							<button type="submit" class="btn btn-default">Signup</button>
-						</form>
+						</form>-->
 					</div><!--/sign up form-->
 				</div>
 			</div>

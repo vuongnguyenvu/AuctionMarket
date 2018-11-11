@@ -32,20 +32,17 @@ public class HomeController {
         return "home";
     }
     @RequestMapping(value = "/login")
-    public String login(){
-        
+    public String login(Model model){
+        UserEntity user = new UserEntity();
+        model.addAttribute("user", user);
         return "login";
     }
     @RequestMapping(value = "/user/home")
     public String userhome(Model model){
-//        login=true;
-//        model.addAttribute("login", login);
         return "redirect:/home";
     }
     @RequestMapping(value = "/logout")
     public String logout(Model model){
-//        login=false;
-//        model.addAttribute("login", login);
         return "redirect:/home";
         
     }
