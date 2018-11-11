@@ -24,13 +24,13 @@ private UserService userService;
 @RequestMapping(value = "/register") 
 public String register(Model model){
     UserEntity user = new UserEntity();
-    user.setAmount(0);
-    user.setRole(userService.getRoleById(2));
     model.addAttribute("user", user);
     return "registerForm";
 }
 @RequestMapping(value = "/register",method = RequestMethod.POST)
 public String register(UserEntity user, Model model){
+    user.setAmount(0);
+    user.setRole(userService.getRoleById(2));
     userService.addUser(user);
     return "redirect:/home";
 }

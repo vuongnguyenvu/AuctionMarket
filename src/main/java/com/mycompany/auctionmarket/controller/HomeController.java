@@ -5,24 +5,49 @@
  */
 package com.mycompany.auctionmarket.controller;
 
+import com.mycompany.auctionmarket.entity.UserEntity;
+import java.security.Principal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
 public class HomeController {
-    public boolean login=false;
+//    public String login="";
     @RequestMapping(value = "/home")
-    public String home(Model model){
-        model.addAttribute("login", login);
+    public String home(Model model, Principal principal){
+        String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+        model.addAttribute("loggedUser", loggedUser);
         return "home";
+    }
+    @RequestMapping(value = "/login")
+    public String login(){
+        
+        return "login";
     }
     @RequestMapping(value = "/user/home")
     public String userhome(Model model){
-        login=true;
-        model.addAttribute("login", login);
-        return "home";
+//        login=true;
+//        model.addAttribute("login", login);
+        return "redirect:/home";
+    }
+    @RequestMapping(value = "/logout")
+    public String logout(Model model){
+//        login=false;
+//        model.addAttribute("login", login);
+        return "redirect:/home";
+        
     }
     
 }

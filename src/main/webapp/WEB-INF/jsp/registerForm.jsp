@@ -52,8 +52,6 @@
                                 <mvc:input  path="phone" type="text" class="form-control"/>
                             </div>
                         </div>
-                                <mvc:input  path="role.role_id" type="hidden" value="${user.role.role_id}"/>
-                                <mvc:input  path="amount" type="hidden" value="${user.amount}"/>
                             <br>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="Register" class="btn btn-primary" />

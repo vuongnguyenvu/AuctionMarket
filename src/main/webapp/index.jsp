@@ -7,7 +7,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <!--<h1>hello</h1>-->
         <c:redirect url="/home"></c:redirect>
     </body>
 </html>

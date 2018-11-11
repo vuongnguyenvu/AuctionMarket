@@ -27,9 +27,9 @@
     <!--<security:http pattern="/favicon.ico" security="none"/>-->
     <!--<security:http pattern="/*" security="none"/>-->
     <security:http auto-config="true">
-        <security:form-login login-page="/login.jsp" login-processing-url="/j_spring_security_check" 
+        <security:form-login  login-page="/login" login-processing-url="/j_spring_security_check" 
                              username-parameter="username" password-parameter="password" />
-        <!--<security:logout logout-url="logout" logout-success-url="/index.jsp" />-->
+        <security:logout logout-url="/j_spring_security_logout" logout-success-url="/logout" delete-cookies="JSESSIONID"/>
         <security:intercept-url pattern="/user/*" access="hasAnyRole('ROLE_admin,ROLE_customer')"/>
         <security:intercept-url pattern="/admin/*" access="hasRole('ROLE_admin')"/>
     </security:http>
