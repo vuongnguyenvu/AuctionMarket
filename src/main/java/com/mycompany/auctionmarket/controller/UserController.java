@@ -5,6 +5,7 @@
  */
 package com.mycompany.auctionmarket.controller;
 
+import com.mycompany.auctionmarket.entity.AuctionEntity;
 import com.mycompany.auctionmarket.entity.RoleEntity;
 import com.mycompany.auctionmarket.entity.UserEntity;
 import com.mycompany.auctionmarket.service.UserService;
@@ -40,6 +41,33 @@ public String viewAccountDetail(Model model,Principal principal){
         loggedUser = "nologin"; 
     UserEntity user = userService.findUserByUsername(loggedUser);
     model.addAttribute("user", user);
+    model.addAttribute("loggedUser", loggedUser);
     return "accountDetail";
+}
+
+@RequestMapping(value = "/user/creatAuction")
+public String gotoAuctionForm(Model model,Principal principal){
+    String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+    model.addAttribute("loggedUser", loggedUser);    
+    AuctionEntity auction = new AuctionEntity();
+    model.addAttribute("auction", auction);
+    return "creatAuction";
+}
+@RequestMapping(value = "/user/creatAuction",method = RequestMethod.POST)
+public String creatAuction(Model model,Principal principal,AuctionEntity auction){
+    String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+    model.addAttribute("loggedUser", loggedUser); 
+    model.addAttribute("auction", auction);
+    return "creatAuction";
 }
 }

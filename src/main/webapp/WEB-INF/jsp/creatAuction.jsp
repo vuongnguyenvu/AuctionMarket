@@ -1,3 +1,4 @@
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
@@ -9,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Account Detail | A-uction</title>
+        <title>Creat Auction | A-uction</title>
         <link href="${pageContext.request.getContextPath()}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.getContextPath()}/css/font-awesome.min.css" rel="stylesheet">
         <link href="${pageContext.request.getContextPath()}/css/prettyPhoto.css" rel="stylesheet">
@@ -80,7 +81,9 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-                                                            
+                                                                <c:if test="${loggedUser!='nologin'}">
+                                                                    <li><a href="${pageContext.request.getContextPath()}/user/accountDetail"><i class="fa fa-user"></i> Account</a></li>
+                                                                </c:if>
 								
 								<li><a href="${pageContext.request.getContextPath()}/user/creatAuction"><i class="fa fa-star"></i> Creat Auction</a></li>
 								<li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
@@ -154,39 +157,58 @@
 		</div><!--/header-bottom-->
     </header><!--/header-->    
 
-	<body>
-            <div class="container">
+	
+    <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12" style="text-align: center">
-                    <h3>Account Information</h3>
+                    <h3>Auction Form</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <tr>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Phone number</th>
-                                <th>Amount</th>
-                            </tr>
-                            <tr>
-                                        <td>${user.username}</td>
-                                        <td>${user.email}</td>
-                                        <td>${user.address}</td>
-                                        <td>${user.phone}</td>
-                                        <td>${user.amount}VND</td>
-                                        
-                            </tr>
-                            
-                        </table>
-                    </div>
+                    <mvc:form action="/user/accountDetail" method="post"  modelAttribute="auction" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2 control-label" >Product name:</label>
+                            <div class="col-xs-8 col-sm-8">
+                                <mvc:input  path="product.product_name" type="text" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2 control-label" >Description:</label>
+                            <div class="col-xs-8 col-sm-8">
+                                <mvc:input  path="product.description" type="text" class="form-control"/>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2 control-label" >Category:</label>
+                            <div class="col-xs-8 col-sm-8">
+                                <mvc:input  path="product.category.category_name" type="text" class="form-control"/>
+                            </div>
+                        </div>     
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2 control-label" >Minimum Price:</label>
+                            <div class="col-xs-8 col-sm-8">
+                                <mvc:input  path="minimum_price" type="text" class="form-control"/>
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2 control-label" >Duration:</label>
+                            <div class="col-xs-8 col-sm-8">
+                                <mvc:input  path="duration" type="text" class="form-control"/>
+                            </div>
+                        </div>
+                            <br>
+                        <div class="form-group" style="text-align: center">
+                            <input type="submit" value="Creat Auction" class="btn btn-primary" />
+                        </div>    
+                    </mvc:form>
+                    
                 </div>
-            </div>    
+            </div>  
+    </div>
+            
         
-    </body>
+    
 	
 
   <jsp:include page="Include/footer.jsp"/>
@@ -198,5 +220,3 @@
     <script src="js/main.js"></script>
 </body>
 </html>
-
-
