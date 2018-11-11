@@ -32,7 +32,14 @@ public class HomeController {
         return "home";
     }
     @RequestMapping(value = "/login")
-    public String login(Model model){
+    public String login(Model model, Principal principal){
+        String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+        model.addAttribute("loggedUser", loggedUser);
         UserEntity user = new UserEntity();
         model.addAttribute("user", user);
         return "login";
