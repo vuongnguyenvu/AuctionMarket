@@ -79,13 +79,19 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
+                                                            <c:if test="${loggedUser=='admin'}">
+                                                                <li><a href="${pageContext.request.getContextPath()}/admin/customerManagement"><i class="fa fa-users"></i> Customer Management</a></li>
+                                                            </c:if>
                                                             <c:if test="${loggedUser!='nologin'}">
                                                                 <li><a href="${pageContext.request.getContextPath()}/user/accountDetail"><i class="fa fa-user"></i> Account</a></li>
                                                             </c:if>
 								
 								<li><a href="${pageContext.request.getContextPath()}/user/creatAuction"><i class="fa fa-star"></i> Creat Auction</a></li>
-								<li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                                                <c:if test="${loggedUser!='admin'}">
+                                                                <li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                                                </c:if>
+                                                                
                                                                 
                                                                     <li>
                                                                         <c:if test="${loggedUser=='nologin'}">

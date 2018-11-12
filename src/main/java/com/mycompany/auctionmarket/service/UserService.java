@@ -10,6 +10,7 @@ import com.mycompany.auctionmarket.entity.UserEntity;
 import com.mycompany.auctionmarket.repository.RoleRepository;
 import com.mycompany.auctionmarket.repository.UserRepository;
 import java.io.Serializable;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,17 @@ public class UserService implements Serializable{
     }
     public UserEntity findUserByUsername(String username){
         return userRepo.findByUsername(username);
+    }
+    public List<UserEntity> getListUser(){
+        return (List<UserEntity>) userRepo.findAll();
+    }
+    public void deleteUserByID(int id){
+        userRepo.delete(id);
+    }
+    public UserEntity topUpAmount(int id,int amount){
+        UserEntity user = userRepo.findOne(id);
+        amount=amount+user.getAmount();
+        user.setAmount(amount);
+        return userRepo.save(user);
     }
 }
