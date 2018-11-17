@@ -5,11 +5,16 @@
  */
 package com.mycompany.auctionmarket.repository;
 
-import com.mycompany.auctionmarket.entity.ImageEntity;
+import com.mycompany.auctionmarket.entity.CategoryEntity;
+import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-
+/**
+ *
+ * @author VUKE
+ */
 @Repository
-public interface ImageRepository extends CrudRepository<ImageEntity, Integer>{
+public interface CategoryRepository extends CrudRepository<CategoryEntity, Integer>{
+    
 }

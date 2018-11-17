@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends CrudRepository<ProductEntity, Integer>{
-    @Query("SELECT p FROM ProductEntity p JOIN p.auctions a WHERE a.actionId = : auctionId")
-    public ProductEntity findByAuctionId(@Param("auctionId") int auctionId); 
+    @Query(value = "SELECT * FROM product INNER JOIN auction ON product.product_id=auction.product_id WHERE auction_id=?1",nativeQuery = true)
+    public ProductEntity findByAuctionId( int auctionId);
 }

@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +43,9 @@ private ProductService productService;
     
 @Autowired
 private AuctionService auctionService;
+
+@Autowired
+private ServletContext servletContext;
 @RequestMapping(value = "/register",method = RequestMethod.POST)
 public String register(UserEntity user, Model model){
 //    PasswordUtil passwordUtil = new PasswordUtil();
@@ -73,7 +78,9 @@ public String gotoAuctionForm(Model model,Principal principal){
         }
         else 
         loggedUser = "nologin"; 
-    model.addAttribute("loggedUser", loggedUser);    
+    model.addAttribute("loggedUser", loggedUser);   
+    List<CategoryEntity> listCategory = productService.getListCategory();
+    model.addAttribute("listCategory", listCategory);
     AuctionEntity auction = new AuctionEntity();
     model.addAttribute("auction", auction);
     return "creatAuction";
@@ -89,13 +96,17 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     UserEntity user = userService.getUserByUsername(loggedUser) ;
     auction.setUser(user);
     ProductEntity product = auction.getProduct();
-    CategoryEntity category = new CategoryEntity(1, "musical");
+    CategoryEntity category = productService.getCategoryById(auction.getProduct().getCategory().getCategory_id());
     product.setCategory(category);
-    ProductEntity saved = productService.saveProduct(product);
-    auction.setProduct(saved);
+    ProductEntity savedProduct = productService.saveProduct(product);
+    auction.setProduct(savedProduct);
     AuctionEntity savedAuction = auctionService.saveAuction(auction);
+    String contextPath=servletContext.getContextPath().toString();
+//    String pathFolder = contextPath+"/images/product-details";
+//    String pathFolder = servletContext.getRealPath("/images/product-details/");
+    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
     
-    String pathFolder = "E:/uploaded";
+//    String pathFolder = "E:/uploaded";
     File dir = new File(pathFolder);
     if(!dir.exists()) {
         dir.mkdir();
@@ -109,13 +120,15 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
     stream.write(bytes);
     stream.close();
-    String filePath = serverFile.getPath();
+//    String filePath = serverFile.getPath();
+//    filePath = serverFile.getPath();
+    String filePath = "images/product-details/"+serverFile.getName();
     ImageEntity image = new ImageEntity();
     image.setPath(filePath);
-    image.setProduct(saved);
+    image.setProduct(savedProduct);
     productService.saveImage(image);
     model.addAttribute("loggedUser", loggedUser); 
     model.addAttribute("auction", auction);
-    return "accountDetail";
+    return "redirect:/home";
 }
 }

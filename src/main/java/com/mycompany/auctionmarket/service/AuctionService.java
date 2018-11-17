@@ -7,6 +7,7 @@ package com.mycompany.auctionmarket.service;
 
 import com.mycompany.auctionmarket.entity.AuctionEntity;
 import com.mycompany.auctionmarket.repository.AuctionRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,8 @@ public class AuctionService {
     }
     public AuctionEntity getAuctionDetail(int id){
         return auctionRepo.findOne(id);
+    }
+    public List<AuctionEntity> getListAuction(){
+        return (List<AuctionEntity>) auctionRepo.findAll();
     }
 }

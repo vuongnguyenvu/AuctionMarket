@@ -38,10 +38,10 @@ private String description;
 @JoinColumn(name = "category_id")
 private CategoryEntity category;
 
-@OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+@OneToMany(cascade = CascadeType.ALL,mappedBy = "product",fetch = FetchType.EAGER)
 private List<ImageEntity> listImage;
 
-@OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+@OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
 private List<AuctionEntity> auctions;
 
 

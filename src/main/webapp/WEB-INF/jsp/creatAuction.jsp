@@ -64,13 +64,20 @@
                             <div class="col-xs-8 col-sm-8">
                                 <mvc:input  path="product.description" type="text" class="form-control"/>
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" >Category:</label>
+                            <label class="col-xs-4 col-sm-2 control-label">
+                                Category</label>
                             <div class="col-xs-8 col-sm-8">
-                                <mvc:input  path="product.category.category_name" type="text" class="form-control"/>
+                                    <mvc:select path="product.category.category_id">
+                                    <c:forEach items="${listCategory}" var="c">
+                                        
+                                            <mvc:option value="${c.category_id}">${c.category_name}</mvc:option>
+                                        
+                                    </c:forEach>
+                                    </mvc:select>
                             </div>
-                        </div>     
+                        </div>    
                         <div class="form-group">
                             <label class="col-xs-4 col-sm-2 control-label" >Minimum Price:</label>
                             <div class="col-xs-8 col-sm-8">

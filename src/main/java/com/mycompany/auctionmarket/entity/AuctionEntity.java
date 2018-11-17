@@ -52,7 +52,7 @@ private boolean status;
 @JoinColumn(name = "user_id")
 private UserEntity user;
 
-@ManyToOne(fetch = FetchType.LAZY)
+@ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "product_id")
 private ProductEntity product;
 
