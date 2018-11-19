@@ -231,18 +231,18 @@
 										<div class="productinfo text-center">
                                                                                     <div>
                                                                                         <c:forEach items="${a.product.listImage}" var="i">
-                                                                                        <img width="150px" height="250px" src="${pageContext.request.getContextPath()}/${i.path}" alt="${a.product.product_name}" />
+                                                                                        <img width="150px" height="200px" src="${pageContext.request.getContextPath()}/${i.path}" alt="${a.product.product_name}" />
                                                                                         </c:forEach>
                                                                                     </div>
-											<h2>${a.minimum_price}</h2>
+											<!--<h2>Current Price: ${a.minimum_price}</h2>-->
 											<p>${a.product.product_name}</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+											<!--<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>-->
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
-												<h2>${a.minimum_price}</h2>
+												<h2>Current Price: ${a.minimum_price}</h2>
 												<p>${a.product.product_name}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+												<a href="${pageContext.request.getContextPath()}/auctionDetail?auctionId=${a.auction_id}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
 											</div>
 										</div>
 								</div>

@@ -1,65 +1,69 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="mvc"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" rel="stylesheet" href="${pageContext.request.getContextPath()}/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12" style="text-align: center">
-                    <h3>Register Form</h3>
-                </div>
-            </div>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Auction Detail | A-uction</title>
+        <link href="${pageContext.request.getContextPath()}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.getContextPath()}/css/font-awesome.min.css" rel="stylesheet">
+        <link href="${pageContext.request.getContextPath()}/css/prettyPhoto.css" rel="stylesheet">
+        <link href="${pageContext.request.getContextPath()}/css/price-range.css" rel="stylesheet">
+        <link href="${pageContext.request.getContextPath()}/css/animate.css" rel="stylesheet">
+            <link href="${pageContext.request.getContextPath()}/css/main.css" rel="stylesheet">
+            <link href="${pageContext.request.getContextPath()}/css/responsive.css" rel="stylesheet">
             
-            
-            <div class="row">
-                <div class="col-xs-12 col-sm-12">
-                    <mvc:form action="register" method="post"  modelAttribute="user" class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" >Username:</label>
-                            <div class="col-xs-8 col-sm-8">
-                                <mvc:input  path="username" type="text" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" >Password:</label>
-                            <div class="col-xs-8 col-sm-8">
-                                <mvc:input  path="password" type="password" class="form-control"/>
-                            </div>
-                        </div> 
-                        <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" >Email:</label>
-                            <div class="col-xs-8 col-sm-8">
-                                <mvc:input  path="email" type="text" class="form-control"/>
-                            </div>
-                        </div>     
-                        <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" >Address:</label>
-                            <div class="col-xs-8 col-sm-8">
-                                <mvc:input  path="address" type="text" class="form-control"/>
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" >Phone Number:</label>
-                            <div class="col-xs-8 col-sm-8">
-                                <mvc:input  path="phone" type="text" class="form-control"/>
-                            </div>
-                        </div>
-                            <br>
-                        <div class="form-group" style="text-align: center">
-                            <input type="submit" value="Register" class="btn btn-primary" />
-                        </div>    
-                    </mvc:form>
-                    
-                </div>
-            </div>
+        <link rel="shortcut icon" href="${pageContext.request.getContextPath()}/images/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
+
+    <!-- Đồng Hồ -->
+    
+        <style>
+            #dongho{
+                margin: 30px;
+                font-size: smaller;
+                font-weight: bold;
+                color: red;
+            }
+        </style>
+
+    </head><!--/head-->
+<body>
+<header id="header"><!--header-->
+        <jsp:include page="Include/header.jsp" />
+	
+    </header><!--/header-->    
+
+	<div> 
+            <c:forEach items="${auction.product.listImage}" var="i">
+                <img width="150px" height="200px" src="${pageContext.request.getContextPath()}/${i.path}" alt="${auction.product.product_name}" />
+            </c:forEach>
         </div>
-    </body>
+    <h2>${auction.product.product_name}</h2>
+    <h2>Current price: ${auction.minimum_price}</h2>
+    <h2>Submit by: ${auction.user.username}</h2>
+    <form action="bid" >
+        <input type="number" name="bid" min="${auction.minimum_price}" value="${auction.minimum_price}"/>
+        <input type="submit" value="Bid"/>
+    </form>       
+        
+    
+	
+
+  <jsp:include page="Include/footer.jsp"/>
+    <script src="js/jquery.js"></script>
+	<script src="js/price-range.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>
