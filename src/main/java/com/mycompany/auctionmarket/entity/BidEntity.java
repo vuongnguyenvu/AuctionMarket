@@ -6,6 +6,7 @@
 package com.mycompany.auctionmarket.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,6 +29,8 @@ private int bid_id;
 @Column
 private int bid_amount;
 
+@Column
+private Timestamp bidTime;
 
 //0:lose
 //1:win
@@ -83,6 +86,14 @@ private UserEntity user;
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public Timestamp getBidTime() {
+        return bidTime;
+    }
+
+    public void setBidTime(Timestamp bidTime) {
+        this.bidTime = bidTime;
     }
 
 }

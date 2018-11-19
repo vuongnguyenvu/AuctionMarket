@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +26,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
+    
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -86,9 +88,9 @@
 								<!--<img src="images/product-details/1.jpg" alt="" />-->
 								<!--<h3>ZOOM</h3>-->
 							</div>
-							<div id="similar-product" class="carousel slide" data-ride="carousel">
+<!--							<div id="similar-product" class="carousel slide" data-ride="carousel">
 								
-								  <!-- Wrapper for slides -->
+								   Wrapper for slides 
 								    <div class="carousel-inner">
 										<div class="item active">
 										  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
@@ -108,14 +110,14 @@
 										
 									</div>
 
-								  <!-- Controls -->
+								   Controls 
 								  <a class="left item-control" href="#similar-product" data-slide="prev">
 									<i class="fa fa-angle-left"></i>
 								  </a>
 								  <a class="right item-control" href="#similar-product" data-slide="next">
 									<i class="fa fa-angle-right"></i>
 								  </a>
-							</div>
+							</div>-->
 
 						</div>
 						<div class="col-sm-7">
@@ -125,21 +127,21 @@
 								<p>Web ID: ${auction.auction_id}</p>
 								<!--<img src="images/product-details/rating.png" alt="" />-->
 								<span>
-									<span>Current Price: ${auction.currentPrice}</span>
+									Current Price: <span id="defaultNumber">${auction.currentPrice}</span>
                                                                         
                                                                         
 									<!--<label>Quantity:</label>-->
                                                                         <form action="user/bid" method="get">
                                                                             <input type="hidden" name="auctionId" value="${auction.auction_id}"/>
                                                                             <input type="hidden" name="biderName" value="${loggedUser}"/>
-                                                                            <input type="number" name="bidAmount" value="${auction.minimum_price}" min="${auction.minimum_price}"/>
+                                                                            <input type="number" name="bidAmount" value="${auction.currentPrice}" min="${auction.currentPrice}"/>
                                                                             <!--<input type="submit" value="Bid" class="btn btn-fefault cart"/>-->
                                                                             <button type="submit"  class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Bid
                                                                             </button>
                                                                         </form>
-                                                                        
+                                                                            <p style="color: red">${message}</p>
 								</span>
 								<p><b>Auction Status:</b> In Stock</p>
 								<!--<p><b>Condition:</b> New</p>-->
@@ -147,25 +149,30 @@
 								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>
+                                                <br>
                                                 <div>
-                                                    <h2>List Bider</h2>
+                                                    <!--<h3 >List Bider</h3>-->
+                                                    <c:if test="${empty auction.listBid}">
                                                     <div class="table-responsive">
-                                                        
-                                                    
                                                     <table class="table table-bordered table-hover">
-                                                        <c:forEach var="b" items="${listBid}">
-                                                        <tr>
-                                                            <td>b.user.username</td>
-                                                            <td>b.bid_amount</td>
-                                                        </tr>  
-                                                        </c:forEach>
+                                                            <c:forEach var="b" items="${auction.listBid}">
+                                                            <tr>
+                                                                <td>${b.user.username}</td>
+                                                                <!--<td>${b.bidTime}</td>-->
+                                                                <td>${b.bid_amount}</td>
+                                                            </tr>  
+                                                            </c:forEach>
+                                                        
                                                         <tr>
                                                             <th>Username</th>
+                                                            <!--<th>Time</th>-->
                                                             <th>Bid amount</th>
                                                         </tr>
                                                     </table>  
                                                     </div>
-                                                </div>                
+                                                    </c:if>
+                                                </div>  
+                                                    
 					</div><!--/product-details-->
 					
 					<div class="category-tab shop-details-tab"><!--category-tab-->
@@ -466,5 +473,6 @@
 	<script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/auction/auction.js"></script>
 </body>
 </html>

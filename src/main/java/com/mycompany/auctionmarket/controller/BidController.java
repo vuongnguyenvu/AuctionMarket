@@ -11,6 +11,7 @@ import com.mycompany.auctionmarket.entity.UserEntity;
 import com.mycompany.auctionmarket.service.AuctionService;
 import com.mycompany.auctionmarket.service.BidService;
 import com.mycompany.auctionmarket.service.UserService;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,16 +36,21 @@ BidService bidService;
                           @RequestParam(value = "bidAmount") int bidAmount,
                           RedirectAttributes rm,
                           Model model){
+        String message="";
         UserEntity user = userService.getUserByUsername(biderName);
         AuctionEntity auction = auctionService.getAuctionDetail(auctionId);
         BidEntity bid = new BidEntity();
         bid.setUser(user);
         bid.setBid_amount(bidAmount);
-        auction.setCurrentPrice(bidAmount);
-        AuctionEntity savedAuction = auctionService.saveAuction(auction);
-        bid.setAuction(savedAuction);
+        if (bidService.checkValidBid(bid, user.getUser_id())) {
+            auction.setCurrentPrice(bidAmount);
+            AuctionEntity savedAuction = auctionService.saveAuction(auction);
+            bid.setAuction(savedAuction);
         
-        BidEntity savedBid = bidService.saveBid(bid);
+            BidEntity savedBid = bidService.saveBid(bid);
+        } else message = "Not enought money for bidding, please top up!";
+        
+        rm.addAttribute("message", message);
         rm.addAttribute("auctionId", auctionId);
         return "redirect:/auctionDetail";
     }

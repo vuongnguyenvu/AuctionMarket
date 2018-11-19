@@ -125,10 +125,9 @@ public String viewAuctionDetail(@RequestParam(value = "auctionId") int auctionId
     
     AuctionEntity auction = auctionService.getAuctionDetail(auctionId);
     List<BidEntity> listBid = bidService.getListBidByAuctionId(auctionId);
-    if (listBid.size()>0&&!listBid.isEmpty()) {
+//    if (listBid != null &&!listBid.isEmpty()) {
         auction.setListBid(listBid);
-    }
-    
+//    }
     model.addAttribute("auction", auction);
     return "auctionDetail";
 }

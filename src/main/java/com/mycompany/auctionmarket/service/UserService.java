@@ -5,8 +5,10 @@
  */
 package com.mycompany.auctionmarket.service;
 
+import com.mycompany.auctionmarket.entity.BidEntity;
 import com.mycompany.auctionmarket.entity.RoleEntity;
 import com.mycompany.auctionmarket.entity.UserEntity;
+import com.mycompany.auctionmarket.repository.BidRepository;
 import com.mycompany.auctionmarket.repository.RoleRepository;
 import com.mycompany.auctionmarket.repository.UserRepository;
 import java.io.Serializable;
@@ -20,6 +22,8 @@ public class UserService implements Serializable{
     public UserRepository userRepo;
     @Autowired
     public RoleRepository roleRepo;
+    @Autowired
+    public BidRepository bidRepo;
     public UserEntity addUser(UserEntity user){
         return userRepo.save(user);
     }
@@ -47,5 +51,19 @@ public class UserService implements Serializable{
             return users.get(0);
         }
         return null;
+    }
+    public UserEntity getUserByUserId(int userId){
+        return userRepo.findOne(userId);
+    }
+    public List<BidEntity> getListBidByUserId(int userId){
+        return bidRepo.findByUser_id(userId);
+    }
+    public int sumBidAmountOfUser(int userId){
+        List<BidEntity> listBid = getListBidByUserId(userId);
+        int sum=0;
+        for (BidEntity b : listBid) {
+            sum=sum+b.getBid_amount();
+        }
+        return sum;
     }
 }
