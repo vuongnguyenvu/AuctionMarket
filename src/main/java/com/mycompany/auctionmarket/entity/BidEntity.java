@@ -38,7 +38,7 @@ private boolean win;
 @JoinColumn(name = "auction_id")
 private AuctionEntity auction;
 
-@ManyToOne(fetch = FetchType.LAZY)
+@ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "user_id")
 private UserEntity user;
 

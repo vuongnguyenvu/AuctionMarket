@@ -41,6 +41,9 @@ private int minimum_price;
 private Timestamp begin_time;
 
 @Column
+private int currentPrice;
+
+@Column
 private int duration;
 
 //0:unactive
@@ -56,7 +59,7 @@ private UserEntity user;
 @JoinColumn(name = "product_id")
 private ProductEntity product;
 
-@OneToMany(mappedBy = "auction")    
+@OneToMany(mappedBy = "auction",fetch = FetchType.LAZY)    
 private List<BidEntity> listBid;
 
     public AuctionEntity() {
@@ -127,5 +130,14 @@ private List<BidEntity> listBid;
         this.listBid = listBid;
     }
 
+    public int getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(int currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+    
+    
 
 }

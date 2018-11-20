@@ -36,8 +36,10 @@
     </head><!--/head-->
     <!--<title>Home | A-uction</title>-->
     <body>
-    <header id="header"><!--header-->
-        <jsp:include page="Include/header.jsp" />
+        <header id="header">
+            <jsp:include page="Include/header.jsp" />
+        </header>
+        
 	
     
 	<section id="slider"><!--slider-->
@@ -113,75 +115,6 @@
 					<div class="left-sidebar">
 						<h2>Category</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-<!--							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Sportswear
-										</a>
-									</h4>
-								</div>
-								<div id="sportswear" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Nike </a></li>
-											<li><a href="#">Under Armour </a></li>
-											<li><a href="#">Adidas </a></li>
-											<li><a href="#">Puma</a></li>
-											<li><a href="#">ASICS </a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Mens
-										</a>
-									</h4>
-								</div>
-								<div id="mens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-											<li><a href="#">Armani</a></li>
-											<li><a href="#">Prada</a></li>
-											<li><a href="#">Dolce and Gabbana</a></li>
-											<li><a href="#">Chanel</a></li>
-											<li><a href="#">Gucci</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Womens
-										</a>
-									</h4>
-								</div>
-								<div id="womens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>-->
                                                         <c:forEach items="${listCategory}" var="c">
                                                         <div class="panel panel-default">
 								<div class="panel-heading">
@@ -643,7 +576,9 @@
 			</div>
 		</div>
 	</section>
-  <jsp:include page="Include/footer.jsp"/>
+<footer id="footer"><!--Footer-->
+	<jsp:include page="Include/footer.jsp"/>
+</footer><!--/Footer-->
     <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
 	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
