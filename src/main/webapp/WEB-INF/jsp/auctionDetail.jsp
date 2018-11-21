@@ -15,23 +15,32 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Product Details | E-Shopper</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">
-    <link href="css/price-range.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
+    <link href="${pageContext.request.getContextPath()}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.getContextPath()}/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${pageContext.request.getContextPath()}/css/prettyPhoto.css" rel="stylesheet">
+    <link href="${pageContext.request.getContextPath()}/css/price-range.css" rel="stylesheet">
+    <link href="${pageContext.request.getContextPath()}/css/animate.css" rel="stylesheet">
+	<link href="${pageContext.request.getContextPath()}/css/main.css" rel="stylesheet">
+	<link href="${pageContext.request.getContextPath()}/css/responsive.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
     
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="${pageContext.request.getContextPath()}/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
+    <style>
+            .vnd:after { content:' VND'; }
+            #dongho{
+                margin: 30px;
+                font-size: smaller;
+                font-weight: bold;
+                color: red;
+            }
+        </style>
 </head><!--/head-->
 
 <body>
@@ -85,39 +94,7 @@
                                                             <c:forEach items="${auction.product.listImage}" var="i">
                                                                 <img width="250px" height="300px" src="${pageContext.request.getContextPath()}/${i.path}" alt="${auction.product.product_name}" />
                                                             </c:forEach>
-								<!--<img src="images/product-details/1.jpg" alt="" />-->
-								<!--<h3>ZOOM</h3>-->
 							</div>
-<!--							<div id="similar-product" class="carousel slide" data-ride="carousel">
-								
-								   Wrapper for slides 
-								    <div class="carousel-inner">
-										<div class="item active">
-										  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-										</div>
-										<div class="item">
-										  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-										</div>
-										<div class="item">
-										  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-										</div>
-										
-									</div>
-
-								   Controls 
-								  <a class="left item-control" href="#similar-product" data-slide="prev">
-									<i class="fa fa-angle-left"></i>
-								  </a>
-								  <a class="right item-control" href="#similar-product" data-slide="next">
-									<i class="fa fa-angle-right"></i>
-								  </a>
-							</div>-->
 
 						</div>
 						<div class="col-sm-7">
@@ -127,50 +104,63 @@
 								<p>Web ID: ${auction.auction_id}</p>
 								<!--<img src="images/product-details/rating.png" alt="" />-->
 								<span>
-									Current Price: <span id="defaultNumber">${auction.currentPrice}</span>
+                                                                    <span>Current Price: <span class="vnd" id="defaultNumber">${auction.currentPrice}</span></span>
                                                                         
                                                                         
 									<!--<label>Quantity:</label>-->
-                                                                        <form action="user/bid" method="get">
+                                                                        <form action="bid" method="get">
                                                                             <input type="hidden" name="auctionId" value="${auction.auction_id}"/>
                                                                             <input type="hidden" name="biderName" value="${loggedUser}"/>
-                                                                            <input type="number" name="bidAmount" value="${auction.currentPrice}" min="${auction.currentPrice}"/>
+                                                                            <input  style="width: 150px" type="number" name="bidAmount" value="${auction.currentPrice}" min="${auction.currentPrice}"/>
                                                                             <!--<input type="submit" value="Bid" class="btn btn-fefault cart"/>-->
-                                                                            <button type="submit"  class="btn btn-fefault cart">
+                                                                            <c:if test="${loggedUser==auction.user.username||loggedUser=='admin'}">
+                                                                                <button type="submit"  class="btn btn-fefault cart" disabled>
 										<i class="fa fa-shopping-cart"></i>
 										Bid
-                                                                            </button>
+                                                                                </button>  
+                                                                            </c:if>
+                                                                            <c:if test="${loggedUser!=auction.user.username&&loggedUser!='admin'}">
+                                                                                <button type="submit"  class="btn btn-fefault cart">
+										<i class="fa fa-shopping-cart"></i>
+										Bid
+                                                                                </button>
+                                                                            </c:if>
+                                                                            
                                                                         </form>
-                                                                            <p style="color: red">${message}</p>
+                                                                            
 								</span>
+                                                                
 								<p><b>Auction Status:</b> In Stock</p>
 								<!--<p><b>Condition:</b> New</p>-->
 								<p><b>Submit by:</b> ${auction.user.username}</p>
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+								<!--<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>-->
 							</div><!--/product-information-->
 						</div>
+                                                                
                                                 <br>
+                                                <p style="color: red;text-align: center">${message}</p>
                                                 <div>
                                                     <!--<h3 >List Bider</h3>-->
-                                                    <c:if test="${empty auction.listBid}">
+                                                    
                                                     <div class="table-responsive">
                                                     <table class="table table-bordered table-hover">
+                                                        <c:if test="${not empty auction.listBid}">
                                                             <c:forEach var="b" items="${auction.listBid}">
                                                             <tr>
-                                                                <td>${b.user.username}</td>
-                                                                <!--<td>${b.bidTime}</td>-->
-                                                                <td>${b.bid_amount}</td>
+                                                                <td style="text-align: center">${b.user.username}</td>
+                                                                <td style="text-align: center">${b.bidTime}</td>
+                                                                <td style="text-align: right"  ><span class="vnd" id="defaultNumber">${b.bid_amount}</span> </td>
                                                             </tr>  
                                                             </c:forEach>
-                                                        
+                                                        </c:if>
                                                         <tr>
-                                                            <th>Username</th>
-                                                            <!--<th>Time</th>-->
-                                                            <th>Bid amount</th>
+                                                            <th style="text-align: center">Username</th>
+                                                            <th style="text-align: center">Bid time</th>
+                                                            <th style="text-align: center">Bid amount</th>
                                                         </tr>
                                                     </table>  
                                                     </div>
-                                                    </c:if>
+                                                    
                                                 </div>  
                                                     
 					</div><!--/product-details-->
@@ -190,7 +180,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery1.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -202,7 +192,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery2.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -214,7 +204,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery3.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -226,7 +216,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery4.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -241,7 +231,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery1.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -253,7 +243,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery3.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -265,7 +255,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery2.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -277,7 +267,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery4.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -292,7 +282,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery1.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -304,7 +294,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery2.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -316,7 +306,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery3.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -328,7 +318,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
+												<img src="${pageContext.request.getContextPath()}/images/home/gallery4.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -354,7 +344,7 @@
 											<input type="email" placeholder="Email Address"/>
 										</span>
 										<textarea name="" ></textarea>
-										<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
+										<b>Rating: </b> <img src="${pageContext.request.getContextPath()}/images/product-details/rating.png" alt="" />
 										<button type="button" class="btn btn-default pull-right">
 											Submit
 										</button>
@@ -375,7 +365,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
+													<img src="${pageContext.request.getContextPath()}/images/home/recommend1.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -387,7 +377,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
+													<img src="${pageContext.request.getContextPath()}/images/home/recommend2.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -399,7 +389,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
+													<img src="${pageContext.request.getContextPath()}/images/home/recommend3.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -413,7 +403,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
+													<img src="${pageContext.request.getContextPath()}/images/home/recommend1.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -425,7 +415,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
+													<img src="${pageContext.request.getContextPath()}/images/home/recommend2.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -437,7 +427,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
+													<img src="${pageContext.request.getContextPath()}/images/home/recommend3.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -467,12 +457,12 @@
 	
 
   
-    <script src="js/jquery.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/auction/auction.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
 </body>
 </html>

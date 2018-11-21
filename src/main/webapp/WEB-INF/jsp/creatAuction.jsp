@@ -81,7 +81,7 @@
                         <div class="form-group">
                             <label class="col-xs-4 col-sm-2 control-label" >Minimum Price:</label>
                             <div class="col-xs-8 col-sm-8">
-                                <mvc:input  path="minimum_price" type="text" class="form-control"/>
+                                <mvc:input  path="minimum_price" type="text" class="form-control" id="defaultNumber"/>
                             </div>
                         </div>  
                         <div class="form-group">
@@ -118,5 +118,6 @@
 	<script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/auction/auction.js"></script>
 </body>
 </html>

@@ -48,10 +48,10 @@ BidService bidService;
             bid.setAuction(savedAuction);
         
             BidEntity savedBid = bidService.saveBid(bid);
-        } else message = "Not enought money for bidding, please top up!";
+        } else message = "Not enough money for bid, please topping up!";
         
         rm.addAttribute("message", message);
         rm.addAttribute("auctionId", auctionId);
-        return "redirect:/auctionDetail";
+        return "redirect:/user/auctionDetail";
     }
 }

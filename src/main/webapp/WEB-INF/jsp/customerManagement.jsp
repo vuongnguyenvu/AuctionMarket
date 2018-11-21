@@ -69,7 +69,7 @@
                                         <td>${user.email}</td>
                                         <td>${user.address}</td>
                                         <td style="text-align: center">${user.phone}</td>
-                                        <td style="text-align: right" class="vnd">${user.amount}</td>
+                                        <td style="text-align: right" class="vnd" ><span id="defaultNumber">${user.amount}</span> </td>
                                         <td>
                                             <c:if test="${user.username!='admin'}">
                                                 <form action="${pageContext.request.getContextPath()}/admin/topup" class="form-horizontal">
@@ -101,6 +101,7 @@
 	<script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
 </body>
 </html>
 

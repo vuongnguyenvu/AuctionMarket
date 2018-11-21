@@ -25,6 +25,7 @@
     <!-- Đồng Hồ -->
     
         <style>
+            .vnd:after { content:' VND'; }
             #dongho{
                 margin: 30px;
                 font-size: smaller;
@@ -167,15 +168,14 @@
                                                                                         <img width="150px" height="200px" src="${pageContext.request.getContextPath()}/${i.path}" alt="${a.product.product_name}" />
                                                                                         </c:forEach>
                                                                                     </div>
-											<!--<h2>Current Price: ${a.minimum_price}</h2>-->
 											<p>${a.product.product_name}</p>
-											<!--<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>-->
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
-												<h2>Current Price: ${a.minimum_price}</h2>
+                                                                                            <h2 >Current Price:</h2>
+                                                                                            <h2 class="vnd" id="defaultNumber">${a.currentPrice}</h2>
 												<p>${a.product.product_name}</p>
-												<a href="${pageContext.request.getContextPath()}/auctionDetail?auctionId=${a.auction_id}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+												<a href='${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message' class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
 											</div>
 										</div>
 								</div>
@@ -585,5 +585,6 @@
 	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
     </body>
 </html>

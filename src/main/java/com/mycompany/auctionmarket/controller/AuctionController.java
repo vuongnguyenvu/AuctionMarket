@@ -84,11 +84,9 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     auction.setProduct(savedProduct);
     AuctionEntity savedAuction = auctionService.saveAuction(auction);
     String contextPath=servletContext.getContextPath().toString();
-//    String pathFolder = contextPath+"/images/product-details";
-//    String pathFolder = servletContext.getRealPath("/images/product-details/");
-    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
-    
-//    String pathFolder = "E:/uploaded";
+
+//    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
+    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
     File dir = new File(pathFolder);
     if(!dir.exists()) {
         dir.mkdir();
@@ -102,19 +100,17 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
     stream.write(bytes);
     stream.close();
-//    String filePath = serverFile.getPath();
-//    filePath = serverFile.getPath();
     String filePath = "images/product-details/"+serverFile.getName();
     ImageEntity image = new ImageEntity();
     image.setPath(filePath);
     image.setProduct(savedProduct);
     productService.saveImage(image);
-//    model.addAttribute("loggedUser", loggedUser); 
-//    model.addAttribute("auction", auction);
     return "redirect:/home";
 }
-@RequestMapping(value = "/auctionDetail")
-public String viewAuctionDetail(@RequestParam(value = "auctionId") int auctionId,Principal principal, Model model){
+@RequestMapping(value = "user/auctionDetail")
+public String viewAuctionDetail(@RequestParam(value = "auctionId") int auctionId,
+                                @RequestParam(value = "message") String message,
+                                Principal principal, Model model){
     String loggedUser;
         if (principal!=null) {
             loggedUser = principal.getName();
@@ -125,10 +121,9 @@ public String viewAuctionDetail(@RequestParam(value = "auctionId") int auctionId
     
     AuctionEntity auction = auctionService.getAuctionDetail(auctionId);
     List<BidEntity> listBid = bidService.getListBidByAuctionId(auctionId);
-//    if (listBid != null &&!listBid.isEmpty()) {
-        auction.setListBid(listBid);
-//    }
+    auction.setListBid(listBid);
     model.addAttribute("auction", auction);
+    model.addAttribute("message", message);
     return "auctionDetail";
 }
     

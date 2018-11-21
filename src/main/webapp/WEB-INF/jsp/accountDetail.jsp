@@ -64,7 +64,7 @@
                                         <td style="text-align: center">${user.email}</td>
                                         <td style="text-align: center">${user.address}</td>
                                         <td style="text-align: center">${user.phone}</td>
-                                        <td style="text-align: center" class="vnd">${user.amount}</td>
+                                        <td style="text-align: center" class="vnd" ><span id="defaultNumber">${user.amount}</span> </td>
                                         
                             </tr>
                             
@@ -83,6 +83,7 @@
 	<script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
 </body>
 </html>
 
