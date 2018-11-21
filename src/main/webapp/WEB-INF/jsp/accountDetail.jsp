@@ -42,7 +42,7 @@
                     <jsp:include page="Include/header.jsp" />
             </header><!--/header-->    
 
-            <div class="container">
+    <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12" style="text-align: center">
                     <h3>Account Information</h3>
@@ -65,15 +65,12 @@
                                         <td style="text-align: center">${user.address}</td>
                                         <td style="text-align: center">${user.phone}</td>
                                         <td style="text-align: center" class="vnd" ><span id="defaultNumber">${user.amount}</span> </td>
-                                        
                             </tr>
-                            
                         </table>
                     </div>
                 </div>
             </div>    
-        
-    
+    </div>
 	
 
   <jsp:include page="Include/footer.jsp"/>

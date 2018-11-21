@@ -29,6 +29,7 @@ public class HomeController {
     private ProductService productService;
     @Autowired
     private AuctionService auctionService;
+    
 //    public String login="";
     @RequestMapping(value = "/home")
     public String home(Model model, Principal principal){
@@ -61,14 +62,38 @@ public class HomeController {
         model.addAttribute("user", user);
         return "login";
     }
-    @RequestMapping(value = "/user/home")
-    public String userhome(Model model){
-        return "redirect:/home";
-    }
+//    @RequestMapping(value = "/user/home")
+//    public String userhome(Model model){
+//        return "redirect:/home";
+//    }
     @RequestMapping(value = "/logout")
     public String logout(Model model){
         return "redirect:/home";
         
+    }
+    @RequestMapping(value = "/searchByCategory")
+    public String searchByCategory(@RequestParam(value = "categoryId") int categoryId,
+                                    Model model, Principal principal){
+    
+    String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+        model.addAttribute("loggedUser", loggedUser);
+        
+        CategoryEntity category = productService.getCategoryById(categoryId);
+        
+        List<CategoryEntity> listCategory = productService.getListCategory();
+        model.addAttribute("listCategory", listCategory);
+        List<AuctionEntity> listAuctionByCategory = auctionService.getAuctionByCategoryId(categoryId);
+        
+        
+        model.addAttribute("category", category);
+        model.addAttribute("listAuctionByCategory", listAuctionByCategory);
+        
+        return "home";
     }
     
 }

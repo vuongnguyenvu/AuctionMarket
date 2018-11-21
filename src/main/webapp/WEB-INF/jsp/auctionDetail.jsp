@@ -58,7 +58,7 @@
 							<c:forEach items="${listCategory}" var="c">
                                                         <div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="${pageContext.request.getContextPath()}/home?categoryId=${c.category_id}">${c.category_name}</a></h4>
+									<h4 class="panel-title"><a href="${pageContext.request.getContextPath()}/searchByCategory?categoryId=${c.category_id}">${c.category_name}</a></h4>
 								</div>
 							</div>        
                                                         </c:forEach> 
@@ -104,7 +104,7 @@
 								<p>Web ID: ${auction.auction_id}</p>
 								<!--<img src="images/product-details/rating.png" alt="" />-->
 								<span>
-                                                                    <span>Current Price: <span class="vnd" id="defaultNumber">${auction.currentPrice}</span></span>
+                                                                    <span>Current Price:</span> <span class="vnd" id="defaultNumber">${auction.currentPrice}</span>
                                                                         
                                                                         
 									<!--<label>Quantity:</label>-->
@@ -144,6 +144,11 @@
                                                     
                                                     <div class="table-responsive">
                                                     <table class="table table-bordered table-hover">
+                                                        <c:if test="${empty auction.listBid}">
+                                                            <tr>
+                                                                <td colspan="3" style="color: red;text-align: center">Have not any bid!</td>
+                                                            </tr>
+                                                        </c:if>
                                                         <c:if test="${not empty auction.listBid}">
                                                             <c:forEach var="b" items="${auction.listBid}">
                                                             <tr>

@@ -31,4 +31,7 @@ public class AuctionService {
     public List<AuctionEntity> getListAuction(){
         return (List<AuctionEntity>) auctionRepo.findAll();
     }
+    public List<AuctionEntity> getAuctionByCategoryId(int categoryId){
+        return auctionRepo.findByCategoryId(categoryId);
+    }
 }

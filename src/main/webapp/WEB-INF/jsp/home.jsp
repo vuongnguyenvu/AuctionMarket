@@ -119,7 +119,7 @@
                                                         <c:forEach items="${listCategory}" var="c">
                                                         <div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="${pageContext.request.getContextPath()}/home?categoryId=${c.category_id}">${c.category_name}</a></h4>
+									<h4 class="panel-title"><a href="${pageContext.request.getContextPath()}/searchByCategory?categoryId=${c.category_id}">${c.category_name}</a></h4>
 								</div>
 							</div>        
                                                         </c:forEach>    
@@ -157,6 +157,37 @@
 				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
+                                            <c:if test="${not empty listAuctionByCategory}">
+						<h2 class="title text-center">Search by category: ${category.category_name}</h2>
+                                                <c:forEach items="${listAuctionByCategory}" var="a">
+                                                <div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+										<div class="productinfo text-center">
+                                                                                    <div>
+                                                                                        <c:forEach items="${a.product.listImage}" var="i">
+                                                                                        <img width="150px" height="200px" src="${pageContext.request.getContextPath()}/${i.path}" alt="${a.product.product_name}" />
+                                                                                        </c:forEach>
+                                                                                    </div>
+											<p>${a.product.product_name}</p>
+										</div>
+										<div class="product-overlay">
+											<div class="overlay-content">
+                                                                                            <h2 >Current Price:</h2>
+                                                                                            <h2 class="vnd" id="defaultNumber">${a.currentPrice}</h2>
+												<p>${a.product.product_name}</p>
+												<a href='${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message' class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>    
+                                                </c:forEach>
+                                            </c:if>     
+                                            
+                                            
+                                            
+                                            <c:if test="${empty listAuctionByCategory}">
 						<h2 class="title text-center">Features Items</h2>
                                                 <c:forEach items="${listAuction}" var="a">
                                                 <div class="col-sm-4">
@@ -182,7 +213,7 @@
 							</div>
 						</div>    
                                                 </c:forEach>
-                                                    
+                                            </c:if>     
 						
 						
 					</div><!--features_items-->

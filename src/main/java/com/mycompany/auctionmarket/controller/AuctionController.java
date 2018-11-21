@@ -85,14 +85,13 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     AuctionEntity savedAuction = auctionService.saveAuction(auction);
     String contextPath=servletContext.getContextPath().toString();
 
-//    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
-    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
+    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
+//    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
     File dir = new File(pathFolder);
     if(!dir.exists()) {
         dir.mkdir();
     }
     
-//    MultipartFile file = savedAuction.getFile();
     byte[] bytes = file.getBytes();
     String fileSource = dir.getAbsolutePath() + File.separator + file.getOriginalFilename();
     
@@ -118,7 +117,8 @@ public String viewAuctionDetail(@RequestParam(value = "auctionId") int auctionId
         else 
         loggedUser = "nologin"; 
     model.addAttribute("loggedUser", loggedUser);  
-    
+    List<CategoryEntity> listCategory = productService.getListCategory();
+    model.addAttribute("listCategory", listCategory);
     AuctionEntity auction = auctionService.getAuctionDetail(auctionId);
     List<BidEntity> listBid = bidService.getListBidByAuctionId(auctionId);
     auction.setListBid(listBid);
