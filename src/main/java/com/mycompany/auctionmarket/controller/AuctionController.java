@@ -85,8 +85,8 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     AuctionEntity savedAuction = auctionService.saveAuction(auction);
     String contextPath=servletContext.getContextPath().toString();
 
-    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
-//    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
+//    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
+    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
     File dir = new File(pathFolder);
     if(!dir.exists()) {
         dir.mkdir();
@@ -124,6 +124,10 @@ public String viewAuctionDetail(@RequestParam(value = "auctionId") int auctionId
     auction.setListBid(listBid);
     model.addAttribute("auction", auction);
     model.addAttribute("message", message);
+    int bidStep=auctionService.getBidStep(auction);
+    int minimumBid = auction.getCurrentPrice()+bidStep;
+    model.addAttribute("minimumBid", minimumBid);
+    model.addAttribute("bidStep", bidStep);
     return "auctionDetail";
 }
     

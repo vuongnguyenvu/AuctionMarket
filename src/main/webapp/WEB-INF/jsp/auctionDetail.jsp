@@ -111,7 +111,7 @@
                                                                         <form action="bid" method="get">
                                                                             <input type="hidden" name="auctionId" value="${auction.auction_id}"/>
                                                                             <input type="hidden" name="biderName" value="${loggedUser}"/>
-                                                                            <input  style="width: 150px" type="number" name="bidAmount" value="${auction.currentPrice}" min="${auction.currentPrice}"/>
+                                                                            <input  style="width: 150px" type="number" name="bidAmount"  step="${bidStep}" value="${minimumBid}" min="${minimumBid}"/>
                                                                             <!--<input type="submit" value="Bid" class="btn btn-fefault cart"/>-->
                                                                             <c:if test="${loggedUser==auction.user.username||loggedUser=='admin'}">
                                                                                 <button type="submit"  class="btn btn-fefault cart" disabled>

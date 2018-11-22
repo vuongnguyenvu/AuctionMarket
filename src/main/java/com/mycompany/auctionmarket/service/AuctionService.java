@@ -34,4 +34,21 @@ public class AuctionService {
     public List<AuctionEntity> getAuctionByCategoryId(int categoryId){
         return auctionRepo.findByCategoryId(categoryId);
     }
+    public int getBidStep(AuctionEntity auction){
+        
+        int bidStep=0;
+        int minimumPrice = auction.getCurrentPrice();
+        if (minimumPrice>100000000) {
+            bidStep=5000000;
+        }else if (minimumPrice>50000000) {
+            bidStep=1000000;
+        } else if (minimumPrice>10000000) {
+            bidStep=500000;
+        } else if (minimumPrice>5000000) {
+            bidStep=100000;
+        } else if (minimumPrice>1000000) {
+            bidStep=50000;
+        } else bidStep=10000;
+        return bidStep;
+    }
 }
