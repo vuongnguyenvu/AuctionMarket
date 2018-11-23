@@ -51,4 +51,7 @@ public class AuctionService {
         } else bidStep=10000;
         return bidStep;
     }
+    public AuctionEntity getAuctionByBidId(int bidId){
+        return auctionRepo.findByBidId(bidId);
+    }
 }

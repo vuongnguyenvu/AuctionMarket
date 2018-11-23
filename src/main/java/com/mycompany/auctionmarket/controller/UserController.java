@@ -6,12 +6,14 @@
 package com.mycompany.auctionmarket.controller;
 
 import com.mycompany.auctionmarket.entity.AuctionEntity;
+import com.mycompany.auctionmarket.entity.BidEntity;
 import com.mycompany.auctionmarket.entity.CategoryEntity;
 import com.mycompany.auctionmarket.entity.ImageEntity;
 import com.mycompany.auctionmarket.entity.ProductEntity;
 import com.mycompany.auctionmarket.entity.RoleEntity;
 import com.mycompany.auctionmarket.entity.UserEntity;
 import com.mycompany.auctionmarket.service.AuctionService;
+import com.mycompany.auctionmarket.service.BidService;
 import com.mycompany.auctionmarket.service.ProductService;
 import com.mycompany.auctionmarket.service.UserService;
 import java.security.Principal;
@@ -38,6 +40,7 @@ private AuctionService auctionService;
 
 @Autowired
 private ServletContext servletContext;
+
 @RequestMapping(value = "/register",method = RequestMethod.POST)
 public String register(UserEntity user, Model model){
 //    PasswordUtil passwordUtil = new PasswordUtil();
@@ -60,6 +63,26 @@ public String viewAccountDetail(Model model,Principal principal){
     model.addAttribute("user", user);
     model.addAttribute("loggedUser", loggedUser);
     return "accountDetail";
+}
+@RequestMapping(value = "/user/myBid")
+public String viewMyBid(Model model,Principal principal){
+    String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+    model.addAttribute("loggedUser", loggedUser);
+    UserEntity user = userService.getUserByUsername(loggedUser);
+    List<BidEntity> listBid=userService.getListBidByUserId(user.getUser_id());
+    if (listBid!=null&&!listBid.isEmpty()) {
+        for (BidEntity bid : listBid) {
+        bid.setAuction(auctionService.getAuctionByBidId(bid.getBid_id()));
+        }
+    }
+    
+    model.addAttribute("listBid", listBid);
+    return "myBid";
 }
 
 

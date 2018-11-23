@@ -79,9 +79,10 @@
                                                             </c:if>
 								
 								<li><a href="${pageContext.request.getContextPath()}/user/creatAuction"><i class="fa fa-star"></i> Creat Auction</a></li>
+                                                                <li><a href="${pageContext.request.getContextPath()}/user/myAuction"><i class="fa fa-crosshairs"></i> My Auction</a></li>
                                                                 <c:if test="${loggedUser!='admin'}">
-                                                                <li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                                                
+								<li><a href="${pageContext.request.getContextPath()}/user/myBid"><i class="fa fa-shopping-cart"></i> My Bid</a></li>
                                                                 </c:if>
                                                                 
                                                                 
