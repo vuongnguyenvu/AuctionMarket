@@ -54,4 +54,8 @@ public class AuctionService {
     public AuctionEntity getAuctionByBidId(int bidId){
         return auctionRepo.findByBidId(bidId);
     }
+    public List<AuctionEntity> getAuctionByUserId(int userId){
+        return auctionRepo.findByUserId(userId);
+    }
+    
 }

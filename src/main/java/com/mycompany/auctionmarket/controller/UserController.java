@@ -84,6 +84,20 @@ public String viewMyBid(Model model,Principal principal){
     model.addAttribute("listBid", listBid);
     return "myBid";
 }
+@RequestMapping(value = "/user/myAuction")
+public String viewMyAuction(Model model,Principal principal){
+    String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+    model.addAttribute("loggedUser", loggedUser);
+    UserEntity user = userService.getUserByUsername(loggedUser);
+    List<AuctionEntity> listAuction = auctionService.getAuctionByUserId(user.getUser_id());
+    model.addAttribute("listAuction", listAuction);
+    return "myAuction";
+}
 
 
 }
