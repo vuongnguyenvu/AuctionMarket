@@ -180,6 +180,14 @@
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
+                                                                                            <p style="display: none;" id="hiden-${a.auction_id}">${a.expiredTime}</p>
+                                                                                            <h2 style="color: blue;" id="expiredTime-${a.auction_id}"></h2>
+                                                                                            
+                                                                                            <script>
+                                                                                                $(document).ready(function(){
+                                                                                                    countDown("hiden-${a.auction_id}", "expiredTime-${a.auction_id}");
+                                                                                                });
+                                                                                            </script>
                                                                                             <h2 >Current Price:</h2>
                                                                                             <h2 class="vnd" id="defaultNumber-${a.auction_id}">${a.currentPrice}</h2>
                                                                                             <script>
@@ -189,7 +197,12 @@
                                                                                                 });
                                                                                             </script>
 												<p>${a.product.product_name}</p>
-												<a href='${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message' class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+                                                                                                <c:if test="${a.status==true}">
+                                                                                                    <button type="button" class="btn btn-default add-to-cart" onclick="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message"><i class="fa fa-shopping-cart"></i>Bid</button>
+                                                                                                </c:if>
+                                                                                                <c:if test="${a.status==false}">
+                                                                                                    <button type="button" disabled class="btn btn-default add-to-cart" ><i class="fa fa-shopping-cart"></i>Bid</button>
+                                                                                                </c:if>    
 											</div>
 										</div>
 								</div>
@@ -217,7 +230,7 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
                                                                                             <p style="display: none;" id="hiden-${a.auction_id}">${a.expiredTime}</p>
-                                                                                            <h2 id="expiredTime-${a.auction_id}"></h2>
+                                                                                            <h2 style="color: blue;" id="expiredTime-${a.auction_id}"></h2>
                                                                                             
                                                                                             <script>
                                                                                                 $(document).ready(function(){
@@ -235,7 +248,12 @@
                                                                                                 });
                                                                                             </script>
 												<p>${a.product.product_name}</p>
-												<a href='${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message' class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+                                                                                                <c:if test="${a.status==true}">
+                                                                                                    <a class="btn btn-default add-to-cart" href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message"><i class="fa fa-shopping-cart"></i>Bid</a>
+                                                                                                </c:if>
+                                                                                                <c:if test="${a.status==false}">
+                                                                                                    <button type="button" disabled class="btn btn-default add-to-cart" ><i class="fa fa-shopping-cart"></i>Bid</button>
+                                                                                                </c:if>   
 											</div>
 										</div>
 								</div>

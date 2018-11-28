@@ -19,8 +19,8 @@ function countDown(inputElement, oupputElement) {
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
             // Display the result in the element with id="demo"
-            document.getElementById(oupputElement).innerHTML = days + " days " + hours + " hours "
-                + minutes + " minutes " + seconds + " seconds ";
+            document.getElementById(oupputElement).innerHTML = days + " d " + hours + " h "
+                + minutes + " m " + seconds + " s ";
         
         
 
