@@ -34,6 +34,14 @@
             }
         </style>
 
+        <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/home.js"></script>
     </head><!--/head-->
     <!--<title>Home | A-uction</title>-->
     <body>
@@ -203,6 +211,16 @@
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
+                                                                                            <p style="display: none;" id="hiden-${a.auction_id}">${a.expiredTime}</p>
+                                                                                            <p  id="expiredTime-${a.auction_id}"></p>
+                                                                                            
+                                                                                            <script>
+                                                                                                $(document).ready(function(){
+                                                                                                    countDown("hiden-${a.auction_id}", "expiredTime-${a.auction_id}");
+                                                                                                });
+                                                                                            </script>
+                                                                                            
+                                                                                            
                                                                                             <h2 >Current Price:</h2>
                                                                                             <h2 class="vnd" id="defaultNumber">${a.currentPrice}</h2>
 												<p>${a.product.product_name}</p>
@@ -610,12 +628,6 @@
 <footer id="footer"><!--Footer-->
 	<jsp:include page="Include/footer.jsp"/>
 </footer><!--/Footer-->
-    <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+    
     </body>
 </html>

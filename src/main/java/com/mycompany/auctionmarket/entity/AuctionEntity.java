@@ -43,8 +43,8 @@ private Timestamp begin_time;
 @Column
 private int currentPrice;
 
-@Column
-private int duration;
+@Column(name = "expired_time")
+private Timestamp expiredTime;
 
 //0:unactive
 //1:active
@@ -90,13 +90,14 @@ private List<BidEntity> listBid;
         this.begin_time = begin_time;
     }
 
-    public int getDuration() {
-        return duration;
+    public Timestamp getExpiredTime() {
+        return expiredTime;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setExpiredTime(Timestamp expiredTime) {
+        this.expiredTime = expiredTime;
     }
+
 
     public boolean isStatus() {
         return status;
@@ -139,5 +140,4 @@ private List<BidEntity> listBid;
     }
     
     
-
 }

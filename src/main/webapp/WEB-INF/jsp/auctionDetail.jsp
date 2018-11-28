@@ -26,7 +26,6 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    
     <link rel="shortcut icon" href="${pageContext.request.getContextPath()}/images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
@@ -102,7 +101,9 @@
 								<h2>${auction.product.product_name}</h2>
                                                                 <p>${auction.product.description}</p>
 								<p>Web ID: ${auction.auction_id}</p>
-								<!--<img src="images/product-details/rating.png" alt="" />-->
+                                                                <p style="display:none;" id="hiden-${auction.auction_id}">${auction.expiredTime}</p>
+                                                                <div id="countdown"><p id="display-countdown"></p></div>        
+                                                                
 								<span>
                                                                     <span>Current Price:</span> <span class="vnd" id="defaultNumber">${auction.currentPrice}</span>
                                                                         
@@ -169,7 +170,8 @@
                                                 </div>  
                                                     
 					</div><!--/product-details-->
-					
+                                        
+                                        
 					<div class="category-tab shop-details-tab"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
@@ -469,5 +471,45 @@
     <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+    <!--<script src="${pageContext.request.getContextPath()}/js/auction/auctiondetail.js"></script>-->
+    <script>
+        
+        $(document).ready(function(){
+    var expriedTime = $("#hiden-${auction.auction_id}").text();
+//alert(expriedTime);
+var countDownDate = new Date(expriedTime).getTime();
+//alert(countDownDate);
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("display-countdown").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text 
+  if(distance == 0) {
+      
+  }
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("display-countdown").innerHTML = "EXPIRED";
+  }
+}, 1000);
+});
+        
+        
+        </script>
 </body>
 </html>

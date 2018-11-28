@@ -18,6 +18,7 @@
         <link href="${pageContext.request.getContextPath()}/css/animate.css" rel="stylesheet">
             <link href="${pageContext.request.getContextPath()}/css/main.css" rel="stylesheet">
             <link href="${pageContext.request.getContextPath()}/css/responsive.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
             
         <link rel="shortcut icon" href="${pageContext.request.getContextPath()}/images/ico/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-144-precomposed.png">
@@ -85,9 +86,9 @@
                             </div>
                         </div>  
                         <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" >Duration:</label>
-                            <div class="col-xs-8 col-sm-8">
-                                <mvc:input  path="duration" type="text" class="form-control"/>
+                            <label class="col-xs-4 col-sm-2 control-label" >Expired Time:</label>
+                            <div class="col-xs-8 col-sm-8" id="expiredTime1">
+                                <mvc:input  path="expiredTime" type="text"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -112,12 +113,15 @@
 	
 
   <jsp:include page="Include/footer.jsp"/>
-    <script src="js/jquery.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/auction/auction.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    
 </body>
 </html>
