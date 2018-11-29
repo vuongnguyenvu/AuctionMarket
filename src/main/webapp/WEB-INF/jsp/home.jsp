@@ -40,7 +40,6 @@
 	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/home.js"></script>
     </head><!--/head-->
     <!--<title>Home | A-uction</title>-->
@@ -182,7 +181,13 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
                                                                                             <h2 >Current Price:</h2>
-                                                                                            <h2 class="vnd" id="defaultNumber">${a.currentPrice}</h2>
+                                                                                            <h2 class="vnd" id="defaultNumber-${a.auction_id}">${a.currentPrice}</h2>
+                                                                                            <script>
+                                                                                                $(document).ready(function(){
+                                                                                                    var currentPrice = $("#defaultNumber-${a.auction_id}").text();
+                                                                                                    $("#defaultNumber-${a.auction_id}").text(parseInt(currentPrice).toLocaleString());
+                                                                                                });
+                                                                                            </script>
 												<p>${a.product.product_name}</p>
 												<a href='${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message' class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
 											</div>
@@ -212,7 +217,7 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
                                                                                             <p style="display: none;" id="hiden-${a.auction_id}">${a.expiredTime}</p>
-                                                                                            <p  id="expiredTime-${a.auction_id}"></p>
+                                                                                            <h2 id="expiredTime-${a.auction_id}"></h2>
                                                                                             
                                                                                             <script>
                                                                                                 $(document).ready(function(){
@@ -222,7 +227,13 @@
                                                                                             
                                                                                             
                                                                                             <h2 >Current Price:</h2>
-                                                                                            <h2 class="vnd" id="defaultNumber">${a.currentPrice}</h2>
+                                                                                            <h2 class="vnd" id="defaultNumber-${a.auction_id}">${a.currentPrice}</h2>
+                                                                                            <script>
+                                                                                                $(document).ready(function(){
+                                                                                                    var currentPrice = $("#defaultNumber-${a.auction_id}").text();
+                                                                                                    $("#defaultNumber-${a.auction_id}").text(parseInt(currentPrice).toLocaleString());
+                                                                                                });
+                                                                                            </script>
 												<p>${a.product.product_name}</p>
 												<a href='${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message' class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
 											</div>

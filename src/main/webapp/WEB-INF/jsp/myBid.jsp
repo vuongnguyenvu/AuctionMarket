@@ -23,7 +23,12 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
-
+        <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <!-- Đồng Hồ -->
     
         <style>
@@ -64,7 +69,13 @@
                                         <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${b.auction.auction_id}&message">${b.auction.auction_id}</a></td>
                                         <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${b.auction.auction_id}&message">${b.auction.product.product_name}</a></td>
                                         <td style="text-align: center">${b.bidTime}</td>
-                                        <td style="text-align: right">${b.bid_amount}</td>
+                                        <td style="text-align: right" id="defaultNumber-${b.bid_id}">${b.bid_amount}</td>
+                                        <script>
+                                                    $(document).ready(function(){
+                                                    var currentPrice = $("#defaultNumber-${b.bid_id}").text();
+                                                    $("#defaultNumber-${b.bid_id}").text(parseInt(currentPrice).toLocaleString());
+                                                    });
+                                        </script>
                                     </tr>
                                 </c:forEach>
                             </c:if>  
@@ -83,13 +94,7 @@
 	
 
   <jsp:include page="Include/footer.jsp"/>
-    <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+    
 </body>
 </html>
 

@@ -32,8 +32,8 @@ private int bid_amount;
 @Column
 private Timestamp bidTime;
 
-//0:lose
-//1:win
+//0:false
+//1:true
 @Column
 private boolean win;
 

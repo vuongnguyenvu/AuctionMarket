@@ -7,6 +7,9 @@ package com.mycompany.auctionmarket.service;
 
 import com.mycompany.auctionmarket.entity.AuctionEntity;
 import com.mycompany.auctionmarket.repository.AuctionRepository;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +32,7 @@ public class AuctionService {
         return auctionRepo.findOne(id);
     }
     public List<AuctionEntity> getListAuction(){
-        return (List<AuctionEntity>) auctionRepo.findAll();
+        return (List<AuctionEntity>) auctionRepo.findAllAuction();
     }
     public List<AuctionEntity> getAuctionByCategoryId(int categoryId){
         return auctionRepo.findByCategoryId(categoryId);
@@ -56,6 +59,13 @@ public class AuctionService {
     }
     public List<AuctionEntity> getAuctionByUserId(int userId){
         return auctionRepo.findByUserId(userId);
+    }
+    public boolean checkValidExpiredTime(AuctionEntity auction){
+        Timestamp today = Timestamp.valueOf(LocalDateTime.now());
+        Timestamp expiredTime=auction.getExpiredTime();
+        if (expiredTime.before(today)) {
+            return false;
+        } else return true;
     }
     
 }

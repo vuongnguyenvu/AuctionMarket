@@ -23,7 +23,12 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
-
+        <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <!-- Đồng Hồ -->
     
         <style>
@@ -64,7 +69,13 @@
                                         <td style="text-align: center">${user.email}</td>
                                         <td style="text-align: center">${user.address}</td>
                                         <td style="text-align: center">${user.phone}</td>
-                                        <td style="text-align: center" class="vnd" ><span id="defaultNumber">${user.amount}</span> </td>
+                                        <td style="text-align: center" class="vnd" id="defaultNumber-${user.user_id}">${user.amount}</td>
+                                        <script>
+                                            $(document).ready(function(){
+                                            var currentPrice = $("#defaultNumber-${user.user_id}").text();
+                                            $("#defaultNumber-${user.user_id}").text(parseInt(currentPrice).toLocaleString());
+                                            });
+                                        </script>
                             </tr>
                         </table>
                     </div>
@@ -73,14 +84,10 @@
     </div>
 	
 
-  <jsp:include page="Include/footer.jsp"/>
-    <script src="js/jquery.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+  <footer id="footer"><!--Footer-->
+	<jsp:include page="Include/footer.jsp"/>
+</footer><!--/Footer-->
+    
 </body>
 </html>
 

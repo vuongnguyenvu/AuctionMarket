@@ -24,7 +24,12 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
-
+        <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <!-- Đồng Hồ -->
     
         <style>
@@ -71,8 +76,20 @@
                             <tr>
                                 <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message">${a.auction_id}</a></td>
                                 <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message">${a.product.product_name}</a></td>
-                                <td style="text-align: right" class="vnd">${a.minimum_price}</td>
-                                <td style="text-align: right" class="vnd">${a.currentPrice}</td>
+                                <td style="text-align: right" class="vnd" id="defaultNumber-${a.auction_id}">${a.minimum_price}</td>
+                                        <script>
+                                                    $(document).ready(function(){
+                                                    var currentPrice = $("#defaultNumber-${a.auction_id}").text();
+                                                    $("#defaultNumber-${a.auction_id}").text(parseInt(currentPrice).toLocaleString());
+                                                    });
+                                        </script>
+                                <td style="text-align: right" class="vnd" id="defaultNumber-${a.product.product_id}">${a.currentPrice}</td>
+                                        <script>
+                                                    $(document).ready(function(){
+                                                    var currentPrice = $("#defaultNumber-${a.product.product_id}").text();
+                                                    $("#defaultNumber-${a.product.product_id}").text(parseInt(currentPrice).toLocaleString());
+                                                    });
+                                        </script>
                                 <td style="text-align: center">available</td>
                             </tr>
                             </c:forEach>
@@ -87,13 +104,7 @@
 	
 
   <jsp:include page="Include/footer.jsp"/>
-    <script src="js/jquery.js"></script>
-    <script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+    
 </body>
 </html>
 

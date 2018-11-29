@@ -24,7 +24,12 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
-
+        <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <!-- Đồng Hồ -->
     
         <style>
@@ -69,7 +74,13 @@
                                         <td>${user.email}</td>
                                         <td>${user.address}</td>
                                         <td style="text-align: center">${user.phone}</td>
-                                        <td style="text-align: right" class="vnd" ><span id="defaultNumber">${user.amount}</span> </td>
+                                        <td style="text-align: right" class="vnd" ><span id="defaultNumber-${user.user_id}">${user.amount}</span> </td>
+                                        <script>
+                                            $(document).ready(function(){
+                                            var currentPrice = $("#defaultNumber-${user.user_id}").text();
+                                            $("#defaultNumber-${user.user_id}").text(parseInt(currentPrice).toLocaleString());
+                                            });
+                                        </script>
                                         <td>
                                             <c:if test="${user.username!='admin'}">
                                                 <form action="${pageContext.request.getContextPath()}/admin/topup" class="form-horizontal">
@@ -95,13 +106,7 @@
 	
 
   <jsp:include page="Include/footer.jsp"/>
-    <script src="js/jquery.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+    
 </body>
 </html>
 

@@ -18,12 +18,15 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AuctionRepository extends CrudRepository<AuctionEntity, Integer>{
-    @Query(value = "SELECT * FROM auction INNER JOIN product ON auction.product_id=product.product_id WHERE category_id=?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM auction INNER JOIN product ON auction.product_id=product.product_id WHERE category_id=?1 ORDER BY auction.status DESC",nativeQuery = true)
     List<AuctionEntity> findByCategoryId(int category_id);
     
     @Query(value = "SELECT * FROM bid INNER JOIN auction ON bid.auction_id=auction.auction_id WHERE bid_id=?1",nativeQuery = true)
     AuctionEntity findByBidId(int bidId);
     
-    @Query(value = "SELECT * FROM auction INNER JOIN user ON auction.user_id=user.user_id WHERE user.user_id=?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM auction INNER JOIN user ON auction.user_id=user.user_id WHERE user.user_id=?1 ORDER BY auction.status DESC",nativeQuery = true)
     List<AuctionEntity> findByUserId(int userId);
+    
+    @Query(value = "SELECT * FROM auction ORDER BY auction.status DESC",nativeQuery = true)
+    List<AuctionEntity> findAllAuction();
 }

@@ -26,8 +26,8 @@ public class TransactionEntity implements Serializable{
 @Column(name = "transaction_id")    
 private int transaction_id;  
 
-//1:+
-//0:-
+//true:+
+//false:-
 @Column
 private boolean transaction_type;
 
