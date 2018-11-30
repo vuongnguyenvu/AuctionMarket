@@ -24,7 +24,9 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
+<!--        
         <link rel="stylesheet" type="text/css" href="${pageContext.request.getContextPath()}/css/jquery.datetimepicker.min.css"/>
+        -->
     <!-- Đồng Hồ -->
     
         <style>
@@ -111,10 +113,11 @@
                             </div>
                         </div>     
                         <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" >Expired Time:</label>
+                            <label class="col-xs-4 col-sm-2 control-label" >Duration:</label>
                             <div class="col-xs-8 col-sm-8" >
-                                <input id="expiredTime" name="expiredTime" type="text" value="cc"/>
-                                <span id="demo1-2"></span>
+                                <input style="text-align: center;" name="days" type="number" min="0" max="30" value="0"/> Days
+                                <input style="text-align: center;" name="hours" type="number" min="0" max="24" value="0"/> Hours
+                                <input style="text-align: center;" name="minutes" type="number" min="0" max="60" value="0"/> Minutes
                             </div>
                         </div>
                             
@@ -140,26 +143,9 @@
     <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
+<!--    
     <script type="text/javascript" src="${pageContext.request.getContextPath()}/js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.getContextPath()}/js/jquery.datetimepicker.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-            $('#demo1-2').datetimepicker({
-//                date: new Date(),
-//                viewMode: 'YMDHM',
-                onDateChange: function(){
-                    var dateTime = this.getText('YYYY-MM-DD hh:mm:ss');
-                    $('#expiredTime').val(dateTime);
-//                    alert('cc');
-//                    $('#date-text-ymd1-2').text(this.getText('yyyy-MM-dd'));
-//                    $('#expiredTime').val(this.getValue());
-                }
-            });
-            
-        });
-    </script>
-
-    
+    -->
 </body>
 </html>

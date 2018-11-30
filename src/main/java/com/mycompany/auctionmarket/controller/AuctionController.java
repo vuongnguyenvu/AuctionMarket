@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +68,10 @@ public String gotoAuctionForm(Model model,Principal principal){
     return "creatAuction";
 }
 @RequestMapping(value = "/user/creatAuction",method = RequestMethod.POST)
-public String creatAuction(Model model,Principal principal,AuctionEntity auction, @RequestParam("file") MultipartFile file) throws FileNotFoundException, IOException{
+public String creatAuction(Model model,Principal principal,AuctionEntity auction, @RequestParam("file") MultipartFile file,
+                            @RequestParam(value = "days")int days,
+                            @RequestParam(value = "hours")int hours,
+                            @RequestParam(value = "minutes")int minutes) throws FileNotFoundException, IOException{
     String loggedUser;
         if (principal!=null) {
             loggedUser = principal.getName();
@@ -80,7 +85,12 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
 //    if (auctionService.checkValidExpiredTime(auction)) {
 //        auction.setStatus(true);
 //    }
-    
+//    Timestamp today = Timestamp.valueOf(LocalDateTime.now());
+    LocalDateTime today = LocalDateTime.now();
+    Timestamp expiredTime = Timestamp.valueOf(today.plusMinutes(days*1440+hours*60+minutes));
+    auction.setBegin_time(Timestamp.valueOf(today));
+    auction.setExpiredTime(expiredTime);
+    auction.setStatus(true);
     ProductEntity product = auction.getProduct();
     CategoryEntity category = productService.getCategoryById(auction.getProduct().getCategory().getCategory_id());
     product.setCategory(category);
@@ -89,8 +99,8 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     AuctionEntity savedAuction = auctionService.saveAuction(auction);
     String contextPath=servletContext.getContextPath().toString();
 
-    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
-//    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
+//    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
+    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
     File dir = new File(pathFolder);
     if(!dir.exists()) {
         dir.mkdir();

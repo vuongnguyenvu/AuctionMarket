@@ -90,7 +90,13 @@
                                                     $("#defaultNumber-${a.product.product_id}").text(parseInt(currentPrice).toLocaleString());
                                                     });
                                         </script>
-                                <td style="text-align: center">available</td>
+                                <c:if test="${a.status==true}">
+                                    <td style="text-align: center; color: blue">Available</td>        
+                                </c:if>
+                                <c:if test="${a.status==false}">
+                                    <td style="text-align: center; color: red">Expired</td>        
+                                </c:if>     
+                                
                             </tr>
                             </c:forEach>
                             </c:if>

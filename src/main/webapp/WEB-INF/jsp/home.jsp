@@ -147,13 +147,6 @@
 							</div>
 						</div><!--/brands_products-->
 						
-						<div class="price-range"><!--price-range-->
-							<h2>Price Range</h2>
-							<div class="well text-center">
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-								 <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-							</div>
-						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
 							<img src="${pageContext.request.getContextPath()}/images/home/shipping.jpg" alt="" />
@@ -198,7 +191,7 @@
                                                                                             </script>
 												<p>${a.product.product_name}</p>
                                                                                                 <c:if test="${a.status==true}">
-                                                                                                    <button type="button" class="btn btn-default add-to-cart" onclick="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message"><i class="fa fa-shopping-cart"></i>Bid</button>
+                                                                                                   <a class="btn btn-default add-to-cart" href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message"><i class="fa fa-shopping-cart"></i>Bid</a>
                                                                                                 </c:if>
                                                                                                 <c:if test="${a.status==false}">
                                                                                                     <button type="button" disabled class="btn btn-default add-to-cart" ><i class="fa fa-shopping-cart"></i>Bid</button>

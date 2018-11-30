@@ -131,6 +131,12 @@
                                                                             
 								</span>
                                                                 
+                                                                            <c:if test="${auction.status==true}">
+                                                                                <p><b>Auction Status:</b> <span style="color: blue;">Available</span></p>
+                                                                            </c:if>
+                                                                            <c:if test="${auction.status==false}">
+                                                                                <p><b>Auction Status:</b> <span style="color: red;">Expired</span></p>
+                                                                            </c:if>    
 								<p><b>Auction Status:</b> In Stock</p>
 								<!--<p><b>Condition:</b> New</p>-->
 								<p><b>Submit by:</b> ${auction.user.username}</p>
