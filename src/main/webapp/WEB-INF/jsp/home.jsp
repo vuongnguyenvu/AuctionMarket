@@ -41,8 +41,18 @@
     <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <script src="${pageContext.request.getContextPath()}/js/home.js"></script>
+    
+<!--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script language="JavaScript">
+            var time = 5; //time in seconds
+            var interval = time * 1000;
+            var timer = setInterval("send()", interval);
+            function send(){
+                window.location.reload(true);
+//                $('#stage').load('./result.jsp');
+            }
+    </script>-->
     </head><!--/head-->
-    <!--<title>Home | A-uction</title>-->
     <body>
         <header id="header">
             <jsp:include page="Include/header.jsp" />
@@ -156,7 +166,7 @@
 				</div>
 				
 				<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
+					<div class="features_items">
                                             <c:if test="${not empty listAuctionByCategory}">
 						<h2 class="title text-center">Search by category: ${category.category_name}</h2>
                                                 <c:forEach items="${listAuctionByCategory}" var="a">
@@ -254,10 +264,11 @@
 						</div>    
                                                 </c:forEach>
                                             </c:if>     
-						
-						
-					</div><!--features_items-->
-					
+					</div>
+                                        
+                                        
+                                         
+                                         
 					<div class="category-tab"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">

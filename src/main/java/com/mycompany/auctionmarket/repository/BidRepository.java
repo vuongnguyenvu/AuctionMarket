@@ -21,5 +21,6 @@ public interface BidRepository extends CrudRepository<BidEntity, Integer>{
     @Query(value = "SELECT * FROM bid WHERE user_id=?1 ORDER BY auction_id,bid_amount DESC",nativeQuery = true)
     List<BidEntity> findByUser_id(int user_id);
     
-    
+    @Query(value = "SELECT * FROM bid WHERE user_id=?1 ORDER BY auction_id,bid_amount DESC",nativeQuery = true)
+    List<BidEntity> deleteLosedBid();
 }

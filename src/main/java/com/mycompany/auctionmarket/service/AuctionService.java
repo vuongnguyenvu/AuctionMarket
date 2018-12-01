@@ -6,7 +6,9 @@
 package com.mycompany.auctionmarket.service;
 
 import com.mycompany.auctionmarket.entity.AuctionEntity;
+import com.mycompany.auctionmarket.entity.BidEntity;
 import com.mycompany.auctionmarket.repository.AuctionRepository;
+import com.mycompany.auctionmarket.repository.BidRepository;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -23,6 +25,9 @@ import org.springframework.stereotype.Service;
 public class AuctionService {
     @Autowired
     AuctionRepository auctionRepo;
+    
+    @Autowired
+    BidService bidService;
     public AuctionEntity saveAuction(AuctionEntity auction){
         AuctionEntity auctionEntity = auctionRepo.save(auction);
         System.out.println(auctionEntity);
@@ -64,6 +69,20 @@ public class AuctionService {
         Timestamp today = Timestamp.valueOf(LocalDateTime.now());
         Timestamp expiredTime=auction.getExpiredTime();
         if (expiredTime.before(today)) {
+            return false;
+        } else return true;
+    }
+    public List<AuctionEntity> getAllExpiredAuction(){
+        return auctionRepo.findExpiredAuction();
+    }
+    public boolean checkClosedAuction(AuctionEntity auction){
+        List<BidEntity> listBid = bidService.getListBidByAuctionId(auction.getAuction_id());
+        if (listBid!=null&&!listBid.isEmpty()) {
+            for (BidEntity bid : listBid) {
+                if (bid.isWin()) {
+                    return true;
+                }
+            }
             return false;
         } else return true;
     }
