@@ -83,7 +83,7 @@
                                                     $("#defaultNumber-${a.auction_id}").text(parseInt(currentPrice).toLocaleString());
                                                     });
                                         </script>
-                                <td style="text-align: right" class="vnd" id="defaultNumber-${a.product.product_id}">${a.currentPrice}</td>
+                                <td style="text-align: center" class="vnd" id="defaultNumber-${a.product.product_id}">${a.currentPrice}</td>
                                         <script>
                                                     $(document).ready(function(){
                                                     var currentPrice = $("#defaultNumber-${a.product.product_id}").text();

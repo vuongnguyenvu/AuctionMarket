@@ -19,7 +19,6 @@ private BidService bidService;
 	@Scheduled(fixedRate=5000)
 	public void printMessage() {
 		System.out.println("I am called by Spring scheduler");
-//                List<AuctionEntity> listAuction = auctionService.getAllExpiredAuction();
                 List<AuctionEntity> listAuction = auctionService.getListAuction();
                 Timestamp currentTime = Timestamp.valueOf(LocalDateTime.now());
                 for (AuctionEntity auction : listAuction) {

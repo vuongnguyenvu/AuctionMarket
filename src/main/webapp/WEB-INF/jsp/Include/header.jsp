@@ -29,7 +29,15 @@
 					</div>
 				</div>
 			</div>
+                        <div class="container">
+                                <div class="col-sm-12">
+						<div class="logo center-block">
+                                                    <a href="${pageContext.request.getContextPath()}/home"><img style="width: 100%;" src="${pageContext.request.getContextPath()}/images/home/MP-market-auction.png" alt="" /></a>
+						</div>
+				</div>
+                        </div>
 		</div><!--/header_top-->
+                
                 <div style="margin-right: 150px; margin-top: 30px;">
                     <c:if test="${loggedUser!='nologin'}">
                     <div style="text-align: right; color: #660000; font-size: larger; font-style: italic;">Wellcome ${loggedUser}!</div>
@@ -42,30 +50,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="${pageContext.request.getContextPath()}/home"><img src="${pageContext.request.getContextPath()}/images/home/logo.jpg" alt="" /></a>
-						</div>
-						<div class="btn-group pull-right">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									USA
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">Canada</a></li>
-									<li><a href="#">UK</a></li>
-								</ul>
-							</div>
-							
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									DOLLAR
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">Canadian Dollar</a></li>
-									<li><a href="#">Pound</a></li>
-								</ul>
-							</div>
+                                                    <a href="${pageContext.request.getContextPath()}/home"><img style="margin-left: 30%" src="${pageContext.request.getContextPath()}/images/home/logo1.jpg" alt="" /></a>
 						</div>
 					</div>
 					<div class="col-sm-8">
@@ -144,11 +129,11 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3">
+<!--					<div class="col-sm-3">
 						<div class="search_box pull-right">
 							<input type="text" placeholder="Search"/>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div><!--/header-bottom-->
