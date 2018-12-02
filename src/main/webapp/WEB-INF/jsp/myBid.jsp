@@ -59,7 +59,7 @@
                         <table class="table table-bordered table-hover">
                             <c:if test="${empty listBid}">
                                 <tr>
-                                    <td colspan="4" style="text-align: center;color: red">Have no bid</td>
+                                    <td colspan="5" style="text-align: center;color: red">Have no bid</td>
                                 </tr>
                             </c:if>
                                 
@@ -69,13 +69,19 @@
                                         <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${b.auction.auction_id}&message">${b.auction.auction_id}</a></td>
                                         <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${b.auction.auction_id}&message">${b.auction.product.product_name}</a></td>
                                         <td style="text-align: center">${b.bidTime}</td>
-                                        <td style="text-align: right" id="defaultNumber-${b.bid_id}">${b.bid_amount}</td>
+                                        <td style="text-align: center" id="defaultNumber-${b.bid_id}">${b.bid_amount}</td>
                                         <script>
                                                     $(document).ready(function(){
                                                     var currentPrice = $("#defaultNumber-${b.bid_id}").text();
                                                     $("#defaultNumber-${b.bid_id}").text(parseInt(currentPrice).toLocaleString());
                                                     });
                                         </script>
+                                        <c:if test="${b.win==true}">
+                                        <td style="text-align: center; color: blue">Won</td>        
+                                        </c:if>
+                                        <c:if test="${b.win==false}">
+                                            <td style="text-align: center; color: tomato">Waiting...</td>        
+                                        </c:if> 
                                     </tr>
                                 </c:forEach>
                             </c:if>  
@@ -85,6 +91,7 @@
                                 <th style="text-align: center">Product</th>
                                 <th style="text-align: center">Bid time</th>
                                 <th style="text-align: center">Bid amount</th>
+                                <th style="text-align: center">Status</th>
                             </tr>
                         </table>
                     </div>

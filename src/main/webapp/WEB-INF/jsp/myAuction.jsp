@@ -76,7 +76,7 @@
                             <tr>
                                 <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message">${a.auction_id}</a></td>
                                 <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message">${a.product.product_name}</a></td>
-                                <td style="text-align: right" class="vnd" id="defaultNumber-${a.auction_id}">${a.minimum_price}</td>
+                                <td style="text-align: center" class="vnd" id="defaultNumber-${a.auction_id}">${a.minimum_price}</td>
                                         <script>
                                                     $(document).ready(function(){
                                                     var currentPrice = $("#defaultNumber-${a.auction_id}").text();

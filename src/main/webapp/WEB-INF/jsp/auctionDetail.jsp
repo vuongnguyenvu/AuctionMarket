@@ -101,26 +101,29 @@
 								<h2>${auction.product.product_name}</h2>
                                                                 <p>${auction.product.description}</p>
 								<p>Web ID: ${auction.auction_id}</p>
+                                                                <p><b>Submit by:</b> ${auction.user.username}</p>
                                                                 <p style="display:none;" id="hiden-${auction.auction_id}">${auction.expiredTime}</p>
-                                                                <div id="countdown"><p id="display-countdown"></p></div>        
+                                                                <div id="countdown">
+                                                                    <span style="color: #000066; text-align: center;
+                                                                          margin-bottom: 1px;font-family: 'Roboto', sans-serif;
+                                                                          font-size: 25px;font-weight:700"
+                                                                                          id="display-countdown"></span></div>        
                                                                 
 								<span>
                                                                     <span>Current Price:</span> <span class="vnd" id="defaultNumber">${auction.currentPrice}</span>
                                                                         
                                                                         
-									<!--<label>Quantity:</label>-->
                                                                         <form action="bid" method="get">
                                                                             <input type="hidden" name="auctionId" value="${auction.auction_id}"/>
                                                                             <input type="hidden" name="biderName" value="${loggedUser}"/>
                                                                             <input  style="width: 150px" type="number" name="bidAmount"  step="${bidStep}" value="${minimumBid}" min="${minimumBid}"/>
-                                                                            <!--<input type="submit" value="Bid" class="btn btn-fefault cart"/>-->
-                                                                            <c:if test="${loggedUser==auction.user.username||loggedUser=='admin'}">
+                                                                            <c:if test="${loggedUser==auction.user.username||loggedUser=='admin'||auction.status==false}">
                                                                                 <button type="submit"  class="btn btn-fefault cart" disabled>
 										<i class="fa fa-shopping-cart"></i>
 										Bid
                                                                                 </button>  
                                                                             </c:if>
-                                                                            <c:if test="${loggedUser!=auction.user.username&&loggedUser!='admin'}">
+                                                                            <c:if test="${loggedUser!=auction.user.username&&loggedUser!='admin'&&auction.status==true}">
                                                                                 <button type="submit"  class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Bid
@@ -137,9 +140,7 @@
                                                                             <c:if test="${auction.status==false}">
                                                                                 <p><b>Auction Status:</b> <span style="color: red;">Expired</span></p>
                                                                             </c:if>    
-								<p><b>Auction Status:</b> In Stock</p>
-								<!--<p><b>Condition:</b> New</p>-->
-								<p><b>Submit by:</b> ${auction.user.username}</p>
+								
 								<!--<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>-->
 							</div><!--/product-information-->
 						</div>
@@ -161,7 +162,7 @@
                                                             <tr>
                                                                 <td style="text-align: center">${b.user.username}</td>
                                                                 <td style="text-align: center">${b.bidTime}</td>
-                                                                <td style="text-align: right"  ><span class="vnd" id="defaultNumber">${b.bid_amount}</span> </td>
+                                                                <td style="text-align: center"  ><span class="vnd" id="defaultNumber">${b.bid_amount}</span> </td>
                                                             </tr>  
                                                             </c:forEach>
                                                         </c:if>

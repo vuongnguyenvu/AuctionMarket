@@ -12,6 +12,7 @@ import com.mycompany.auctionmarket.service.AuctionService;
 import com.mycompany.auctionmarket.service.BidService;
 import com.mycompany.auctionmarket.service.UserService;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +47,10 @@ BidService bidService;
             auction.setCurrentPrice(bidAmount);
             AuctionEntity savedAuction = auctionService.saveAuction(auction);
             bid.setAuction(savedAuction);
-        
+            Timestamp currentTime = Timestamp.valueOf(LocalDateTime.now());
+            bid.setBidTime(currentTime);
+            bid.setWin(false);
+            
             BidEntity savedBid = bidService.saveBid(bid);
         } else message = "Not enough money for bid, please topping up!";
         

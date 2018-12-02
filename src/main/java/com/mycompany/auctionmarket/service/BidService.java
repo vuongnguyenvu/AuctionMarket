@@ -21,6 +21,9 @@ public class BidService {
     public BidEntity saveBid(BidEntity bid){
         return bidRepo.save(bid);
     }
+    public void deleteBid(BidEntity bid){
+        bidRepo.delete(bid.getBid_id());
+    }
     public List<BidEntity> getListBidByAuctionId(int auctionId){
         return bidRepo.findByAuction_id(auctionId);
     }

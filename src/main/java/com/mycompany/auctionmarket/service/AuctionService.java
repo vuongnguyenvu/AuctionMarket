@@ -72,9 +72,6 @@ public class AuctionService {
             return false;
         } else return true;
     }
-    public List<AuctionEntity> getAllExpiredAuction(){
-        return auctionRepo.findExpiredAuction();
-    }
     public boolean checkClosedAuction(AuctionEntity auction){
         List<BidEntity> listBid = bidService.getListBidByAuctionId(auction.getAuction_id());
         if (listBid!=null&&!listBid.isEmpty()) {
