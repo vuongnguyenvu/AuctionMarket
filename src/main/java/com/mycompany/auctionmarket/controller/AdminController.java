@@ -39,7 +39,7 @@ public String customerManagement(Model model, Principal principal){
 //    return "redirect:/admin/customerManagement";
 //}
 @RequestMapping(value = "/admin/topup")
-public String deleteUser(@RequestParam(value = "userId") int userId,
+public String topUpMoney(@RequestParam(value = "userId") int userId,
                             @RequestParam(value = "top_up_amount") int top_up_amount){
     userService.topUpAmount(userId, top_up_amount);
     return "redirect:/admin/customerManagement";

@@ -17,8 +17,8 @@ private AuctionService auctionService;
 @Autowired
 private BidService bidService;
 	@Scheduled(fixedRate=5000)
-	public void printMessage() {
-		System.out.println("I am called by Spring scheduler");
+	public void timerLoop() {
+//		System.out.println("I am called by Spring scheduler");
                 List<AuctionEntity> listAuction = auctionService.getListAuction();
                 Timestamp currentTime = Timestamp.valueOf(LocalDateTime.now());
                 for (AuctionEntity auction : listAuction) {
@@ -31,15 +31,14 @@ private BidService bidService;
                                 if (auction.getCurrentPrice()==bid.getBid_amount()) {
                                     bid.setWin(true);
                                     bidService.saveBid(bid);
+                                    //check out
+                                    bidService.payMoneyforBid(bid);
+                                    auctionService.receiveMoney(auction.getUser(), bid);
                                 } else bidService.deleteBid(bid);  //deleteLosedBid
                             }
                         }
                     }
-                    
-                    
-                    
-                    
                 }
-                
 	}
+        
 }

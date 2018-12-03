@@ -7,6 +7,8 @@ package com.mycompany.auctionmarket.service;
 
 import com.mycompany.auctionmarket.entity.AuctionEntity;
 import com.mycompany.auctionmarket.entity.BidEntity;
+import com.mycompany.auctionmarket.entity.TransactionEntity;
+import com.mycompany.auctionmarket.entity.UserEntity;
 import com.mycompany.auctionmarket.repository.AuctionRepository;
 import com.mycompany.auctionmarket.repository.BidRepository;
 import java.sql.Timestamp;
@@ -28,6 +30,13 @@ public class AuctionService {
     
     @Autowired
     BidService bidService;
+    
+    @Autowired
+    UserService userService;
+    
+    @Autowired
+    TransactionService transactionService;
+    
     public AuctionEntity saveAuction(AuctionEntity auction){
         AuctionEntity auctionEntity = auctionRepo.save(auction);
         System.out.println(auctionEntity);
@@ -82,6 +91,31 @@ public class AuctionService {
             }
             return false;
         } else return true;
+    }
+    public void receiveMoney(UserEntity user,BidEntity bid){
+        int newUserAmount= user.getAmount()+(int)(bid.getBid_amount()*0.95); //receiving 95% of auction price
+        user.setAmount(newUserAmount);
+        UserEntity savedUser = userService.addUser(user);
+        //save to transaction Repository
+        TransactionEntity userTransaction = new TransactionEntity();
+        userTransaction.setUser(savedUser);
+        userTransaction.setTransaction_amount((int)(bid.getBid_amount()*0.95));
+        userTransaction.setTransaction_type(true);
+        Timestamp currentTime = Timestamp.valueOf(LocalDateTime.now());
+        userTransaction.setTransaction_date(currentTime);
+        transactionService.saveTransaction(userTransaction);
+        
+        UserEntity adminUser = userService.getUserByUserId(6);
+        int newAdminAmount=adminUser.getAmount()+(int)(bid.getBid_amount()*0.05); //pay 5% of auction price for web service
+        adminUser.setAmount(newAdminAmount);
+        UserEntity savedAdminUser = userService.addUser(adminUser);
+        //save to transaction Repository
+        TransactionEntity adminTransaction = new TransactionEntity();
+        adminTransaction.setUser(savedAdminUser);
+        adminTransaction.setTransaction_amount((int)(bid.getBid_amount()*0.05));
+        adminTransaction.setTransaction_type(true);
+        adminTransaction.setTransaction_date(currentTime);
+        transactionService.saveTransaction(adminTransaction);
     }
     
 }

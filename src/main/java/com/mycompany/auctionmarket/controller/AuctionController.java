@@ -82,10 +82,6 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     auction.setUser(user);
     int currentPrice = auction.getMinimum_price();
     auction.setCurrentPrice(currentPrice);
-//    if (auctionService.checkValidExpiredTime(auction)) {
-//        auction.setStatus(true);
-//    }
-//    Timestamp today = Timestamp.valueOf(LocalDateTime.now());
     LocalDateTime today = LocalDateTime.now();
     Timestamp expiredTime = Timestamp.valueOf(today.plusMinutes(days*1440+hours*60+minutes));
     auction.setBegin_time(Timestamp.valueOf(today));
@@ -99,8 +95,8 @@ public String creatAuction(Model model,Principal principal,AuctionEntity auction
     AuctionEntity savedAuction = auctionService.saveAuction(auction);
     String contextPath=servletContext.getContextPath().toString();
 
-    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
-//    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
+//    String pathFolder = "E:/0.JAVA/final project/AuctionMarket/src/main/webapp/images/product-details/";
+    String pathFolder = "D:/1.Vu-V6297/JAVA/0.final project/AuctionMarket/src/main/webapp/images/product-details/";
     File dir = new File(pathFolder);
     if(!dir.exists()) {
         dir.mkdir();
