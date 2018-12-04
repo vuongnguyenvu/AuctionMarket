@@ -66,6 +66,7 @@
                                 <th style="text-align: center">Phone number</th>
                                 <th style="text-align: center" >Amount</th>
                                 <th style="text-align: center">Top up</th>
+                                <th style="text-align: center">Transaction history</th>
                                 <!--<th style="text-align: center">Active/DeActive</th>-->
                             </tr>
                             <c:forEach var="user" items="${listUser}">
@@ -87,12 +88,13 @@
                                                 <input type="hidden" name="userId" value="${user.user_id}"/>
                                                 <div style="text-align: center"> 
                                                     <input style="text-align: center" type="number" name="top_up_amount" value="0" min="0"/>    
-                                                    <input  type="submit" value="Top up amount" class="btn btn-default">
+                                                    <input  type="submit" value="Top up" class="btn btn-default">
                                                 </div>
                                                 </form>
                                             </c:if>
                                             
-                                        </td> 
+                                        </td>
+                                        <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/admin/viewAccountDetail?userId=${user.user_id}">View</a></td>
                             </tr>
                             </c:forEach>
                             

@@ -5,7 +5,9 @@
  */
 package com.mycompany.auctionmarket.controller;
 
+import com.mycompany.auctionmarket.entity.TransactionEntity;
 import com.mycompany.auctionmarket.entity.UserEntity;
+import com.mycompany.auctionmarket.service.TransactionService;
 import com.mycompany.auctionmarket.service.UserService;
 import java.security.Principal;
 import java.util.List;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private TransactionService transactionService;
 @RequestMapping(value = "/admin/customerManagement")
 public String customerManagement(Model model, Principal principal){
     String loggedUser;
@@ -43,5 +48,20 @@ public String topUpMoney(@RequestParam(value = "userId") int userId,
                             @RequestParam(value = "top_up_amount") int top_up_amount){
     userService.topUpAmount(userId, top_up_amount);
     return "redirect:/admin/customerManagement";
+}
+@RequestMapping(value = "/admin/viewAccountDetail")
+public String viewAccountDetail(@RequestParam(value = "userId") int userId, Model model,Principal principal){
+    String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+        model.addAttribute("loggedUser", loggedUser);
+    UserEntity user = userService.getUserByUserId(userId);
+    List<TransactionEntity> listTransaction = transactionService.getListTransactionByUserId(user.getUser_id());
+    user.setListTransaction(listTransaction);
+    model.addAttribute("user", user);
+    return "accountDetail";
 }
 }

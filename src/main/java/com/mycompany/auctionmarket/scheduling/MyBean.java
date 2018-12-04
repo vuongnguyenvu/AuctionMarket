@@ -16,7 +16,7 @@ public class MyBean {
 private AuctionService auctionService;
 @Autowired
 private BidService bidService;
-	@Scheduled(fixedRate=5000)
+	@Scheduled(fixedRate=2000)
 	public void timerLoop() {
 //		System.out.println("I am called by Spring scheduler");
                 List<AuctionEntity> listAuction = auctionService.getListAuction();

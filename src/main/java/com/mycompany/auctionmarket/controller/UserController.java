@@ -11,10 +11,12 @@ import com.mycompany.auctionmarket.entity.CategoryEntity;
 import com.mycompany.auctionmarket.entity.ImageEntity;
 import com.mycompany.auctionmarket.entity.ProductEntity;
 import com.mycompany.auctionmarket.entity.RoleEntity;
+import com.mycompany.auctionmarket.entity.TransactionEntity;
 import com.mycompany.auctionmarket.entity.UserEntity;
 import com.mycompany.auctionmarket.service.AuctionService;
 import com.mycompany.auctionmarket.service.BidService;
 import com.mycompany.auctionmarket.service.ProductService;
+import com.mycompany.auctionmarket.service.TransactionService;
 import com.mycompany.auctionmarket.service.UserService;
 import java.security.Principal;
 import java.util.List;
@@ -41,6 +43,8 @@ private AuctionService auctionService;
 @Autowired
 private ServletContext servletContext;
 
+@Autowired
+private TransactionService transactionService;
 @RequestMapping(value = "/register",method = RequestMethod.POST)
 public String register(UserEntity user, Model model){
 //    PasswordUtil passwordUtil = new PasswordUtil();
@@ -60,6 +64,8 @@ public String viewAccountDetail(Model model,Principal principal){
         else 
         loggedUser = "nologin"; 
     UserEntity user = userService.getUserByUsername(loggedUser);
+    List<TransactionEntity> listTransaction = transactionService.getListTransactionByUserId(user.getUser_id());
+    user.setListTransaction(listTransaction);
     model.addAttribute("user", user);
     model.addAttribute("loggedUser", loggedUser);
     return "accountDetail";

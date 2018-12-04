@@ -73,31 +73,40 @@
 						
                                             <!-- thanh cuộn chạy auto  -->
 						<div class="carousel-inner">
+                                                    
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1><span>A</span>uction</h1>
-									<h2>TERMS OF RETURN 30 DAYS</h2>
-									<p>TERMS OF RETURN 30 DAYS </p>
-									<button type="button" class="btn btn-default get">Bid it now</button>
+                                                                        <h2 style="color: #FE980F">WITH LATEST CREATION</h2>
+									<h3>${latestAuction.product.product_name} </h3>
+                                                                        <a class="btn btn-default get" href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${latestAuction.auction_id}&message">
+                                                                            Bid it now</a>
 								</div>
 								<div class="col-sm-6">
-                                                                    <img src="${pageContext.request.getContextPath()}/images/home/girl1.jpg" class="girl img-responsive" alt="" />
-									<img src="${pageContext.request.getContextPath()}/images/home/pricing.png"  class="pricing" alt="" />
+                                                                    <c:forEach items="${latestAuction.product.listImage}" var="i">
+                                                                                        <img class="girl img-responsive" src="${pageContext.request.getContextPath()}/${i.path}" alt="${a.product.product_name}" />
+                                                                                        </c:forEach>
 								</div>
 							</div>
-							<div class="item">
+                                                        
+                                                        <c:forEach items="${highestAuction}" var="h">
+                                                               <div class="item">
 								<div class="col-sm-6">
 									<h1><span>A</span>uction</h1>
-									<h2>SHIPPING COST: 29.000 ₫</h2>
-									<p>SHIPPING COST: 29.000 ₫</p>
-									<button type="button" class="btn btn-default get">Bid it now</button>
+                                                                        <h2 style="color: #FE980F">WITH HIGH CURRENT PRICE</h2>
+									<h3>${h.product.product_name} </h3>
+                                                                        <a class="btn btn-default get" href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${h.auction_id}&message">
+                                                                            Bid it now</a>
 								</div>
 								<div class="col-sm-6">
-									<img src="${pageContext.request.getContextPath()}/images/home/girl2.jpg" class="girl img-responsive" alt="" />
-									<img src="${pageContext.request.getContextPath()}/images/home/pricing.png"  class="pricing" alt="" />
+                                                                    <c:forEach items="${h.product.listImage}" var="i">
+                                                                                        <img class="girl img-responsive" src="${pageContext.request.getContextPath()}/${i.path}" alt="${h.product.product_name}" />
+                                                                                        </c:forEach>
 								</div>
-							</div>
+                                                                </div>             
+                                                        </c:forEach>                    
 							
+<!--							
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>A</span>uction</h1>
@@ -110,7 +119,7 @@
 									<img src="${pageContext.request.getContextPath()}/images/home/pricing.png" class="pricing" alt="" />
 								</div>
 							</div>
-							
+							-->
 						</div>
 						
 						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
@@ -255,13 +264,60 @@
                                         
                                          
                                          
-					
+                                    <c:if test="${not empty listAvailableAuction}">
 					<div class="recommended_items"><!--recommended_items-->
 						<h2 class="title text-center">recommended items</h2>
 						
 						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
-								<div class="item active">	
+								<div class="item active">
+                                                                    <c:forEach items="${listAvailableAuction}" var="a">
+                                                                        <div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+                                                                                                    <c:forEach items="${a.product.listImage}" var="i">
+                                                                                                    <img width="150px" height="200px" src="${pageContext.request.getContextPath()}/${i.path}" alt="${a.product.product_name}" />
+                                                                                                    </c:forEach>
+													<!--<img src="${pageContext.request.getContextPath()}/images/home/recommend1.jpg" alt="" />-->
+													<h2>${a.currentPrice}</h2>
+													<p>${a.product.product_name}</p>
+													<a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+                                                                    </c:forEach>
+<!--									
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="${pageContext.request.getContextPath()}/images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="${pageContext.request.getContextPath()}/images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>-->
+<!--								<div class="item">	
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">
@@ -301,58 +357,17 @@
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="item">	
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="${pageContext.request.getContextPath()}/images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="${pageContext.request.getContextPath()}/images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="${pageContext.request.getContextPath()}/images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Bid</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-								</div>
+								</div>-->
 							</div>
-							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+<!--							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
 								<i class="fa fa-angle-left"></i>
 							  </a>
 							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
 								<i class="fa fa-angle-right"></i>
-							  </a>			
+							  </a>			-->
 						</div>
 					</div><!--/recommended_items-->
-					
+				</c:if>
 				</div>
 			</div>
 		</div>

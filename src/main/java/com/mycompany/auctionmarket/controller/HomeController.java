@@ -47,6 +47,15 @@ public class HomeController {
         List<AuctionEntity> listAuction = auctionService.getListAuction();
         model.addAttribute("listAuction", listAuction);
         
+        List<AuctionEntity> listAvailableAuction = auctionService.getListAvailableAuction();
+        model.addAttribute("listAvailableAuction", listAvailableAuction);
+        
+        List<AuctionEntity> highestAuction = auctionService.getHighestCurrentPriceAuction();
+        model.addAttribute("highestAuction", highestAuction);
+        
+        AuctionEntity latestAuction = auctionService.getLatestAuction();
+        model.addAttribute("latestAuction", latestAuction);
+        
         return "home";
     }
     @RequestMapping(value = "/login")

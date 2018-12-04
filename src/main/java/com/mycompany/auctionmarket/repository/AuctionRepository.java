@@ -30,4 +30,13 @@ public interface AuctionRepository extends CrudRepository<AuctionEntity, Integer
     @Query(value = "SELECT * FROM auction ORDER BY auction.status DESC",nativeQuery = true)
     List<AuctionEntity> findAllAuction();
     
+    @Query(value = "SELECT * FROM auction WHERE STATUS = 1 ORDER BY expired_time DESC",nativeQuery = true)
+    List<AuctionEntity> findAvailableAuction();
+    
+    @Query(value = "SELECT * FROM auction WHERE STATUS = 1 ORDER BY currentPrice DESC LIMIT 2",nativeQuery = true)
+    List<AuctionEntity> findHighestCurrentPriceAuction();
+    
+    @Query(value = "SELECT * FROM auction WHERE STATUS = 1 ORDER BY begin_time DESC LIMIT 1",nativeQuery = true)
+    AuctionEntity findlatestAuction();
+    
 }

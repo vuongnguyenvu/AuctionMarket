@@ -53,10 +53,6 @@
 						<form action="j_spring_security_check" method="post">
 							<input type="text" placeholder="Username" name="username"/>
 							<input type="password" placeholder="Password" name="password"/>
-							<span>
-								<input type="checkbox" class="checkbox"> 
-								Keep me signed in
-							</span>
 							<button type="submit" class="btn btn-default">Login</button>
                                                         <input type="hidden" name="login" value="${SPRING_SECURITY_LAST_EXCEPTION}"/>
                                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

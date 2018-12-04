@@ -111,21 +111,16 @@
 								<li><a href="${pageContext.request.getContextPath()}/home" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.jsp">Products</a></li>
-										<li><a href="product-details.jsp">Product Details</a></li> 
-										<li><a href="checkout.jsp">Checkout</a></li> 
-										<li><a href="cart.jsp">Cart</a></li> 
-										<li><a href="login.jsp">Login</a></li> 
+										<li><a href="${pageContext.request.getContextPath()}/user/myAuction">My Auction</a></li> 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.jsp">Blog List</a></li>
-										<li><a href="blog-single.jsp">Blog Single</a></li>
+                                        <li><a href="#">Blog List</a></li>
+										<li><a href="#">Blog Single</a></li>
                                     </ul>
                                 </li> 
-								<li><a href="404.jsp">404</a></li>
-								<li><a href="contact-us.jsp">Contact</a></li>
+								<li><a href="#">Contact</a></li>
 							</ul>
 						</div>
 					</div>

@@ -29,6 +29,7 @@
 	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
         <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/home.js"></script>
     <!-- Đồng Hồ -->
     
         <style>
@@ -68,19 +69,64 @@
                                         <td style="text-align: center">${user.username}</td>
                                         <td style="text-align: center">${user.email}</td>
                                         <td style="text-align: center">${user.address}</td>
-                                        <td style="text-align: center">${user.phone}</td>
-                                        <td style="text-align: center" class="vnd" id="defaultNumber-${user.user_id}">${user.amount}</td>
+                                        <td style="text-align: center">${user.phone} </td>
+                                        <td style="text-align: center" class="vnd" ><span id="defaultNumber">${user.amount}</span></td>
                                         <script>
                                             $(document).ready(function(){
-                                            var currentPrice = $("#defaultNumber-${user.user_id}").text();
-                                            $("#defaultNumber-${user.user_id}").text(parseInt(currentPrice).toLocaleString());
+                                            var currentPrice = $("#defaultNumber").text();
+                                            $("#defaultNumber").text(parseInt(currentPrice).toLocaleString());
                                             });
                                         </script>
                             </tr>
                         </table>
                     </div>
                 </div>
-            </div>    
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12" style="text-align: center">
+                    <h3>Transaction History</h3>
+                </div>                                
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <th style="text-align: center">Time</th>
+                                <th style="text-align: center">Amount</th>
+                            </tr>
+                            <c:if test="${not empty user.listTransaction}">
+                                <c:forEach items="${user.listTransaction}" var="t">
+                                <tr>
+                                        <td style="text-align: center">${t.transaction_date}</td>
+                                        <td style="text-align: center">
+                                            <c:if test="${t.transaction_type==false}">
+                                                <span style="color: red">-</span>
+                                            </c:if>
+                                            <c:if test="${t.transaction_type==true}">
+                                                <span style="color: blue">+</span>
+                                            </c:if>    
+                                                <span class="vnd" id="defaultNumber-${t.transaction_id}">${t.transaction_amount}</span></td>
+                                        <script>
+                                            $(document).ready(function(){
+                                            var currentPrice = $("#defaultNumber-${t.transaction_id}").text();
+                                            $("#defaultNumber-${t.transaction_id}").text(parseInt(currentPrice).toLocaleString());
+                                            });
+                                        </script>
+                                </tr>
+                                </c:forEach>
+                            </c:if>
+                                <c:if test="${empty user.listTransaction}">
+                                    <tr>
+                                        <td colspan="2" style="color: red; text-align: center">Have no transaction</td>
+                                    </tr>
+                                </c:if>    
+                            
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>                                
     </div>
 	
 

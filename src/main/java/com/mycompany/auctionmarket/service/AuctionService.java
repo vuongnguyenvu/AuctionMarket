@@ -74,6 +74,15 @@ public class AuctionService {
     public List<AuctionEntity> getAuctionByUserId(int userId){
         return auctionRepo.findByUserId(userId);
     }
+    public List<AuctionEntity> getHighestCurrentPriceAuction(){
+        return auctionRepo.findHighestCurrentPriceAuction();
+    }
+    public AuctionEntity getLatestAuction(){
+        return auctionRepo.findlatestAuction();
+    }
+    public List<AuctionEntity> getListAvailableAuction(){
+        return auctionRepo.findAvailableAuction();
+    }
     public boolean checkValidExpiredTime(AuctionEntity auction){
         Timestamp today = Timestamp.valueOf(LocalDateTime.now());
         Timestamp expiredTime=auction.getExpiredTime();
