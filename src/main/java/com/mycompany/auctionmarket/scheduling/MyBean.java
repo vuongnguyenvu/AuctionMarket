@@ -40,19 +40,19 @@ public JavaMailSender emailSender;
                                     bidService.payMoneyforBid(bid);
                                     auctionService.receiveMoney(auction.getUser(), bid);
                                     
-//                                    
-//                                        // Create a Simple MailMessage.
-//                                    SimpleMailMessage message = new SimpleMailMessage();
-//
-//                                    message.setTo(bid.getUser().getEmail());
-//                                    message.setSubject("Auction Winner");
-//                                    message.setText("Hello, Congratulation! You've just become the winner of the Auction: "+auction.getProduct().getProduct_name()+"/n"
-//                                    +"Please coming to my office for receiving your product.");
-//                                    
-//                                    // Send Message!
-//                                    emailSender.send(message);
-//                                        
                                     
+//                                         Create a Simple MailMessage.
+                                    SimpleMailMessage message = new SimpleMailMessage();
+
+                                    message.setTo(bid.getUser().getEmail());
+                                    message.setSubject("Auction Winner Notification");
+                                    message.setText("Dear "+bid.getUser().getUsername()+",\nCongratulation! You've just become the winner of the Auction: "+auction.getProduct().getProduct_name()+"\n"
+                                    +"Auction ID: "+auction.getAuction_id()+"\nPlease coming my office to receive your product. You can also use my Shipping Service. \nPlease contact 0935212453 for more information. \nThank you.");
+                                    
+                                    // Send Message!
+                                    emailSender.send(message);
+                                        
+                                    System.out.println(emailSender);
                                     
                                 } else bidService.deleteBid(bid);  //deleteLosedBid
                             }
