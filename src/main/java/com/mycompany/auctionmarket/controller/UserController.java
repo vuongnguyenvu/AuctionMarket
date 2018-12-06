@@ -15,6 +15,7 @@ import com.mycompany.auctionmarket.entity.TransactionEntity;
 import com.mycompany.auctionmarket.entity.UserEntity;
 import com.mycompany.auctionmarket.service.AuctionService;
 import com.mycompany.auctionmarket.service.BidService;
+import com.mycompany.auctionmarket.service.PasswordEncoderService;
 import com.mycompany.auctionmarket.service.ProductService;
 import com.mycompany.auctionmarket.service.TransactionService;
 import com.mycompany.auctionmarket.service.UserService;
@@ -45,10 +46,14 @@ private ServletContext servletContext;
 
 @Autowired
 private TransactionService transactionService;
+
+@Autowired
+PasswordEncoderService passwordEncoderService;
+
 @RequestMapping(value = "/register",method = RequestMethod.POST)
 public String register(UserEntity user, Model model){
-//    PasswordUtil passwordUtil = new PasswordUtil();
-//    user.setPassword(passwordUtil.encode(user.getPassword()));
+    String hashpassword = passwordEncoderService.encoderPassword(user.getPassword());
+    user.setPassword(hashpassword);
     user.setAmount(0);
     user.setRole(userService.getRoleById(2));
     userService.addUser(user);

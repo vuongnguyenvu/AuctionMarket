@@ -141,4 +141,5 @@ public String viewAuctionDetail(@RequestParam(value = "auctionId") int auctionId
     return "auctionDetail";
 }
     
+
 }

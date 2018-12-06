@@ -5,8 +5,10 @@
  */
 package com.mycompany.auctionmarket.controller;
 
+import com.mycompany.auctionmarket.entity.AuctionEntity;
 import com.mycompany.auctionmarket.entity.TransactionEntity;
 import com.mycompany.auctionmarket.entity.UserEntity;
+import com.mycompany.auctionmarket.service.AuctionService;
 import com.mycompany.auctionmarket.service.TransactionService;
 import com.mycompany.auctionmarket.service.UserService;
 import java.security.Principal;
@@ -22,7 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
     @Autowired
     private UserService userService;
-    
+    @Autowired
+    private AuctionService auctionService;
     @Autowired
     private TransactionService transactionService;
 @RequestMapping(value = "/admin/customerManagement")
@@ -63,5 +66,19 @@ public String viewAccountDetail(@RequestParam(value = "userId") int userId, Mode
     user.setListTransaction(listTransaction);
     model.addAttribute("user", user);
     return "accountDetail";
+}
+@RequestMapping(value = "admin/auctionManagement")
+public String auctionManagement(Model model, Principal principal){
+    String loggedUser;
+        if (principal!=null) {
+            loggedUser = principal.getName();
+        }
+        else 
+        loggedUser = "nologin"; 
+        model.addAttribute("loggedUser", loggedUser);
+    List<AuctionEntity> listAuction = auctionService.getListAuction();
+    model.addAttribute("listAuction", listAuction);
+    return "auctionManagement";
+    
 }
 }

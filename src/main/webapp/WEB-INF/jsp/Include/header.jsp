@@ -58,15 +58,14 @@
 							<ul class="nav navbar-nav">
                                                             <c:if test="${loggedUser=='admin'}">
                                                                 <li><a href="${pageContext.request.getContextPath()}/admin/customerManagement"><i class="fa fa-users"></i> Customer Management</a></li>
+                                                                <li><a href="${pageContext.request.getContextPath()}/admin/auctionManagement"><i class="fa fa-beer"></i> Auction Management</a></li>
                                                             </c:if>
                                                             <c:if test="${loggedUser!='nologin'}">
                                                                 <li><a href="${pageContext.request.getContextPath()}/user/accountDetail"><i class="fa fa-user"></i> Account</a></li>
                                                             </c:if>
-								
-								<li><a href="${pageContext.request.getContextPath()}/user/creatAuction"><i class="fa fa-star"></i> Creat Auction</a></li>
-                                                                <li><a href="${pageContext.request.getContextPath()}/user/myAuction"><i class="fa fa-beer"></i> My Auction</a></li>
                                                                 <c:if test="${loggedUser!='admin'}">
-                                                                
+                                                                <li><a href="${pageContext.request.getContextPath()}/user/creatAuction"><i class="fa fa-star"></i> Creat Auction</a></li>    
+                                                                <li><a href="${pageContext.request.getContextPath()}/user/myAuction"><i class="fa fa-beer"></i> My Auction</a></li>
 								<li><a href="${pageContext.request.getContextPath()}/user/myBid"><i class="fa fa-shopping-cart"></i> My Bid</a></li>
                                                                 </c:if>
                                                                 

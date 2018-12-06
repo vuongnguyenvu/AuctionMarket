@@ -102,11 +102,13 @@
                                         <td style="text-align: center">
                                             <c:if test="${t.transaction_type==false}">
                                                 <span style="color: red">-</span>
+                                                <span class="vnd" style="color: red" id="defaultNumber-${t.transaction_id}">${t.transaction_amount}</span></td>
                                             </c:if>
                                             <c:if test="${t.transaction_type==true}">
                                                 <span style="color: blue">+</span>
+                                                <span class="vnd" style="color: blue" id="defaultNumber-${t.transaction_id}">${t.transaction_amount}</span></td>
                                             </c:if>    
-                                                <span class="vnd" id="defaultNumber-${t.transaction_id}">${t.transaction_amount}</span></td>
+                                                
                                         <script>
                                             $(document).ready(function(){
                                             var currentPrice = $("#defaultNumber-${t.transaction_id}").text();

@@ -59,7 +59,7 @@ public class HomeController {
         return "home";
     }
     @RequestMapping(value = "/login")
-    public String login(Model model, Principal principal){
+    public String login(Model model, Principal principal,@RequestParam(value = "error", required = false) String error){
         String loggedUser;
         if (principal!=null) {
             loggedUser = principal.getName();
@@ -67,6 +67,9 @@ public class HomeController {
         else 
         loggedUser = "nologin"; 
         model.addAttribute("loggedUser", loggedUser);
+        if (error != null) {
+			model.addAttribute("error", "Invalid username and password!");
+		}
         UserEntity user = new UserEntity();
         model.addAttribute("user", user);
         return "login";

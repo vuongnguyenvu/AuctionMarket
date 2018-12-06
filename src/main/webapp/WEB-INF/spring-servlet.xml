@@ -20,27 +20,27 @@
 <mvc:resources mapping="/webjars/**" location="/webjars/" />
     <security:authentication-manager>
         <security:authentication-provider >
-            <!--<security:password-encoder ref="passwordEncoder"/>-->
+            <security:password-encoder ref="encoder"/>
             <security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select username,password,1 as enabled from user where username=?"
             authorities-by-username-query="select user.username as username, concat('ROLE_',role_name) from role join user on role.role_id = user.role_id where user.username=?"/>
         </security:authentication-provider>
     </security:authentication-manager>
-<!--<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-            <constructor-arg name="strength" value="11"/>
-            </bean>
-<bean id="userDetailsManager" class="org.springframework.security.provisioning.JdbcUserDetailsManager">
-            <property name="dataSource" ref="dataSource"/>
-            </bean>    -->
-    <!--<security:http pattern="/favicon.ico" security="none"/>-->
-    <!--<security:http pattern="/*" security="none"/>-->
     <security:http auto-config="true">
-        <security:form-login  login-page="/login" login-processing-url="/j_spring_security_check" 
-                             username-parameter="username" password-parameter="password" />
-        <security:logout logout-url="/j_spring_security_logout" logout-success-url="/logout" delete-cookies="JSESSIONID"/>
+        <security:form-login  login-page="/login" login-processing-url="/auth/login_check"
+                            default-target-url="/home"
+                            authentication-failure-url="/login?error"
+                             username-parameter="username" 
+                             password-parameter="password" />
+        <security:logout logout-url="/j_spring_security_logout" logout-success-url="/login?logout" delete-cookies="JSESSIONID"/>
         <security:intercept-url pattern="/user/*" access="hasAnyRole('ROLE_admin,ROLE_customer')"/>
         <security:intercept-url pattern="/admin/*" access="hasRole('ROLE_admin')"/>
         <security:csrf disabled="true"/>
     </security:http>
+    
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="10" />
+    </bean>
+    
     <bean id="multipartResolver"
     class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 

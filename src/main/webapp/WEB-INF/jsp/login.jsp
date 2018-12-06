@@ -34,6 +34,15 @@
                 font-weight: bold;
                 color: red;
             }
+            .error {
+                padding: 15px;
+                margin-bottom: 20px;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                color: #a94442;
+                background-color: #f2dede;
+                border-color: #ebccd1;
+            }
         </style>
 
     </head><!--/head-->
@@ -50,19 +59,17 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Login to your account</h2>
-						<form action="j_spring_security_check" method="post">
+						<form action="<c:url value='/auth/login_check?targetUrl=${targetUrl}' />" method="post">
 							<input type="text" placeholder="Username" name="username"/>
 							<input type="password" placeholder="Password" name="password"/>
 							<button type="submit" class="btn btn-default">Login</button>
-                                                        <input type="hidden" name="login" value="${SPRING_SECURITY_LAST_EXCEPTION}"/>
                                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						</form>
 					</div><!--/login form-->
-                                        <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-                                            <p style="color: red;">Login Fail. Detail:
-                                            <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
-                                            </p>
-                                        </c:if> 
+                                        <br>
+                                        <c:if test="${not empty error}">
+                                                <div class="error">${error}</div>
+                                        </c:if>
 				</div>
 				<div class="col-sm-1">
 					<h2 class="or">OR</h2>

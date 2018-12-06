@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Product Details | E-Shopper</title>
+    <title>Product Details | A-uction</title>
     <link href="${pageContext.request.getContextPath()}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.getContextPath()}/css/font-awesome.min.css" rel="stylesheet">
     <link href="${pageContext.request.getContextPath()}/css/prettyPhoto.css" rel="stylesheet">
@@ -31,6 +31,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
+    <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <style>
             .vnd:after { content:' VND'; }
             #dongho{
@@ -147,7 +153,13 @@
                                                             <tr>
                                                                 <td style="text-align: center">${b.user.username}</td>
                                                                 <td style="text-align: center">${b.bidTime}</td>
-                                                                <td style="text-align: center"  ><span class="vnd" id="defaultNumber">${b.bid_amount}</span> </td>
+                                                                <td style="text-align: center"  ><span class="vnd" id="bidNumber-${b.bid_id}">${b.bid_amount}</span> </td>
+                                                                <script>
+                                                                    $(document).ready(function(){
+                                                                    var currentPrice = $("#bidNumber-${b.bid_id}").text();
+                                                                    $("#bidNumber-${b.bid_id}").text(parseInt(currentPrice).toLocaleString());
+                                                                    });
+                                                                </script>
                                                             </tr>  
                                                             </c:forEach>
                                                         </c:if>
@@ -177,12 +189,7 @@
 	
 
   
-    <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
-    <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
+    
     <script src="${pageContext.request.getContextPath()}/js/auction/auction.js"></script>
     <!--<script src="${pageContext.request.getContextPath()}/js/auction/auctiondetail.js"></script>-->
     <script>
