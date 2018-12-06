@@ -48,12 +48,12 @@
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-2">
 						<div class="logo pull-left">
-                                                    <a href="${pageContext.request.getContextPath()}/home"><img style="margin-left: 30%" src="${pageContext.request.getContextPath()}/images/home/logo1.jpg" alt="" /></a>
+                                                    <a href="${pageContext.request.getContextPath()}/home"><img style="margin-left: 10%" src="${pageContext.request.getContextPath()}/images/home/logo1.jpg" alt="" /></a>
 						</div>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-10">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
                                                             <c:if test="${loggedUser=='admin'}">
@@ -63,11 +63,12 @@
                                                             <c:if test="${loggedUser!='nologin'}">
                                                                 <li><a href="${pageContext.request.getContextPath()}/user/accountDetail"><i class="fa fa-user"></i> Account</a></li>
                                                             </c:if>
-                                                                <c:if test="${loggedUser!='admin'}">
+                                                                
                                                                 <li><a href="${pageContext.request.getContextPath()}/user/creatAuction"><i class="fa fa-star"></i> Creat Auction</a></li>    
                                                                 <li><a href="${pageContext.request.getContextPath()}/user/myAuction"><i class="fa fa-beer"></i> My Auction</a></li>
-								<li><a href="${pageContext.request.getContextPath()}/user/myBid"><i class="fa fa-shopping-cart"></i> My Bid</a></li>
-                                                                </c:if>
+                                                            <c:if test="${loggedUser!='admin'}">
+                                                                <li><a href="${pageContext.request.getContextPath()}/user/myBid"><i class="fa fa-shopping-cart"></i> My Bid</a></li>    
+                                                            </c:if>    
                                                                 
                                                                 
                                                                     <li>

@@ -17,10 +17,18 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service("userService")
+@Transactional
 public class UserService implements Serializable{
+//    @Autowired
+//    @Qualifier("bcryptEncoder")        
+//    PasswordEncoder bcryptEncoder;
+    
     @Autowired
     public UserRepository userRepo;
     @Autowired
@@ -30,6 +38,8 @@ public class UserService implements Serializable{
     @Autowired
     public TransactionService transactionService;
     public UserEntity addUser(UserEntity user){
+//        String hashPassword = bcryptEncoder.encode(user.getPassword());
+//        user.setPassword(hashPassword);
         return userRepo.save(user);
     }
     public RoleEntity getRoleById(int id){

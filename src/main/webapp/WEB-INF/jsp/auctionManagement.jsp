@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Auction Management | A-uction</title>
+        <title>My Auction | A-uction</title>
         <link href="${pageContext.request.getContextPath()}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.getContextPath()}/css/font-awesome.min.css" rel="stylesheet">
         <link href="${pageContext.request.getContextPath()}/css/prettyPhoto.css" rel="stylesheet">
@@ -25,9 +25,9 @@
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="${pageContext.request.getContextPath()}/images/ico/apple-touch-icon-57-precomposed.png">
         <script src="${pageContext.request.getContextPath()}/js/jquery.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/price-range.js"></script>
         <script src="${pageContext.request.getContextPath()}/js/jquery.scrollUp.min.js"></script>
-	<script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.getContextPath()}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.getContextPath()}/js/jquery.prettyPhoto.js"></script>
         <script src="${pageContext.request.getContextPath()}/js/main.js"></script>
     <!-- Đồng Hồ -->
@@ -59,6 +59,14 @@
                 <div class="col-xs-12 col-sm-12">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
+                            <tr>
+                                <th style="text-align: center">Auction ID</th>
+                                <th style="text-align: center">Product</th>
+                                <th style="text-align: center">Submit by</th>
+                                <th style="text-align: center">Minimum Price</th>
+                                <th style="text-align: center">Current Price</th>
+                                <th style="text-align: center">Status</th>
+                            </tr>
                             <c:if test="${empty listAuction}">
                             <tr>
                                 <td colspan="5" style="text-align: center;color: red">Have no auction</td>    
@@ -67,41 +75,33 @@
                             <c:if test="${not empty listAuction}">
                             <c:forEach var="a" items="${listAuction}">
                             <tr>
-                                        <td>${a.auction_id}</td>
-                                        <td>${a.product.product_name}</td>
-                                        <td style="text-align: center" class="vnd" id="defaultMinimumPrice-${a.auction_id}">${a.minimum_price}</td>
+                                <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message">${a.auction_id}</a></td>
+                                <td style="text-align: center"><a href="${pageContext.request.getContextPath()}/user/auctionDetail?auctionId=${a.auction_id}&message">${a.product.product_name}</a></td>
+                                <td style="text-align: center">${a.user.username}</td>
+                                <td style="text-align: center" class="vnd" id="defaultMinimumPrice-${a.auction_id}">${a.minimum_price}</td>
                                         <script>
                                                     $(document).ready(function(){
                                                     var currentPrice = $("#defaultMinimumPrice-${a.auction_id}").text();
                                                     $("#defaultMinimumPrice-${a.auction_id}").text(parseInt(currentPrice).toLocaleString());
                                                     });
                                         </script>
-                                        <td style="text-align: center" class="vnd" id="defaultCurrentPrice-${a.auction_id}">${a.currentPrice}</td>
+                                <td style="text-align: center" class="vnd" id="defaultCurrentPrice-${a.auction_id}">${a.currentPrice}</td>
                                         <script>
                                                     $(document).ready(function(){
                                                     var currentPrice = $("#defaultCurrentPrice-${a.auction_id}").text();
                                                     $("#defaultCurrentPrice-${a.auction_id}").text(parseInt(currentPrice).toLocaleString());
                                                     });
                                         </script>
-                                        <td style="text-align: center">${a.user.user_name}</td>
-                                        <c:if test="${a.status==true}">
-                                        <td style="text-align: center; color: blue">Available</td>        
-                                        </c:if>
-                                        <c:if test="${a.status==false}">
-                                            <td style="text-align: center; color: red">Expired</td>        
-                                        </c:if> 
+                                <c:if test="${a.status==true}">
+                                    <td style="text-align: center; color: blue">Available</td>        
+                                </c:if>
+                                <c:if test="${a.status==false}">
+                                    <td style="text-align: center; color: red">Expired</td>        
+                                </c:if>     
+                                
                             </tr>
                             </c:forEach>
                             </c:if>
-                            <tr>
-                                <th style="text-align: center">Auction ID</th>
-                                <th style="text-align: center">Product Name</th>
-                                <th style="text-align: center">Minimum Price</th>
-                                <th style="text-align: center">Current Price</th>
-                                <th style="text-align: center" >Submit by</th>
-                                <th style="text-align: center">Status</th>
-                            </tr>
-                            
                             
                         </table>
                     </div>

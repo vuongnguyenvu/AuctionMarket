@@ -48,7 +48,7 @@
         <jsp:include page="Include/header.jsp" />
     </header><!--/header-->    
 
-	<body>
+	
             <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12" style="text-align: center">
@@ -103,8 +103,8 @@
                     </div>
                 </div>
             </div>    
-        
-    </body>
+            </div>
+   
 	
 
   <jsp:include page="Include/footer.jsp"/>
