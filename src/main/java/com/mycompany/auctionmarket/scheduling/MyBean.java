@@ -31,8 +31,10 @@ public JavaMailSender emailSender;
                         if (!auctionService.checkClosedAuction(auction)||auction.getCurrentPrice()==auction.getMinimum_price()) {
                         auction.setStatus(false);
                         auctionService.saveAuction(auction);
+                        
                         List<BidEntity> listBid = bidService.getListBidByAuctionId(auction.getAuction_id());
-                            for (BidEntity bid : listBid) {
+                            if (listBid!=null&&!listBid.isEmpty()) {
+                                for (BidEntity bid : listBid) {
                                 if (auction.getCurrentPrice()==bid.getBid_amount()) {
                                     bid.setWin(true);
                                     bidService.saveBid(bid);
@@ -54,8 +56,10 @@ public JavaMailSender emailSender;
                                         
                                     System.out.println(emailSender);
                                     
-                                } else bidService.deleteBid(bid);  //deleteLosedBid
+                                    } else bidService.deleteBid(bid);  //deleteLosedBid
+                                }
                             }
+                            
                         }
                     }
                 }
